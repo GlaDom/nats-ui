@@ -1,8 +1,8 @@
 package app
 
 type App struct {
-	Servers NatsServer
-	Clients Client
+	Servers []NatsServer
+	Clients []Client
 }
 
 func NewApp() *App {

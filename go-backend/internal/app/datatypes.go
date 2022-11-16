@@ -172,3 +172,7 @@ type Leafz struct {
 	Leafnodes int         `json:"leafnodes"`
 	Leafs     interface{} `json:"leafs"`
 }
+
+type Uri struct {
+	Index uint64 `json:"index" uri:"index"`
+}
