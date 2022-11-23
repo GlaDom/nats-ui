@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/GlaDom/nats-ui/internal/app"
 	"github.com/gin-gonic/gin"
@@ -12,24 +13,17 @@ import (
 func main() {
 	state := app.NewApp()
 
+	go func() {
+		for {
+			state.Run()
+			time.Sleep(time.Second * 4)
+		}
+	}()
+
 	router := gin.Default()
 
 	router.POST("/run", func(c *gin.Context) {
-		//start back end after validating server connection
-		server := app.NatsServer{}
-		if err := c.BindJSON(&server); err != nil {
-			c.AbortWithError(http.StatusBadRequest, err)
-			return
-		}
 
-		nc, err := nats.Connect(fmt.Sprintf("nats://%s:%s", server.Host, server.Name))
-		if err != nil {
-			c.AbortWithError(http.StatusInternalServerError, fmt.Errorf("failed to connect to nats-server"))
-			return
-		}
-		defer nc.Close()
-		//fmt.Println(server)
-		c.IndentedJSON(200, server)
 	})
 
 	router.POST("/api/state/server/new", func(ctx *gin.Context) {
