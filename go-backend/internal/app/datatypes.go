@@ -3,13 +3,13 @@ package app
 import "time"
 
 type NatsServer struct {
-	ID             int64
-	Name           string
-	Host           string
-	Port           uint64
-	MonitoringPort uint64
-	Varz           *Varz
-	Subz           *Subz
+	ID             int64  `json:"id"`
+	Name           string `json:"name"`
+	Host           string `json:"host"`
+	Port           uint64 `json:"port"`
+	MonitoringPort uint64 `json:"monitoringport"`
+	Varz           *Varz  `json:"varz"`
+	Subz           *Subz  `json:"subz"`
 }
 
 type Client struct {
@@ -171,4 +171,8 @@ type Leafz struct {
 	Now       time.Time   `json:"now"`
 	Leafnodes int         `json:"leafnodes"`
 	Leafs     interface{} `json:"leafs"`
+}
+
+type Uri struct {
+	Index uint64 `json:"index" uri:"index"`
 }
