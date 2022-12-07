@@ -1,7 +1,7 @@
 <mat-sidenav-container class="sidenav">
     <p>Servers</p>
-    <mat-selection-list>
-        <mat-list-option *ngFor="let server of servers" [value]="server">
+    <mat-selection-list [multiple]="false">
+        <mat-list-option *ngFor="let server of servers">
             {{server}}
         </mat-list-option>
     </mat-selection-list>

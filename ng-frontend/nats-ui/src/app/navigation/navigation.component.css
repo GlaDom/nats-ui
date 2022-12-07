@@ -1,3 +1,11 @@
 .sidenav {
     width: 250px;
 }
+
+.mat-selection-list {
+    overflow: hidden;
+}
+
+.mat-list-option[aria-selected="true"] {
+    background: grey;
+}
