@@ -1,0 +1,42 @@
+.main-body {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 300px 2px auto;
+    grid-template-rows: 100%;
+}
+
+.side-nav {
+    height: 100%;
+    width: 300px;
+    background-color: blue;
+}
+
+.mat-divider {
+    color: #CAC4D0;
+}
+
+.right-div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 50px 92%;
+}
+
+.upper-div {
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.lower-div {
+    margin: 10px;
+}
+
+button {
+    height: 40px;
+    width: 136px;
+    font-weight: bold;
+    background-color: #49454F;
+    color: white;
+    border-radius: 20px;
+}

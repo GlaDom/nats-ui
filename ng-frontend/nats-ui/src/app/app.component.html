@@ -1,4 +1,15 @@
-  <ng-container>
-    <mat-toolbar class="header">Nats WebUI</mat-toolbar>
-    <app-navigation></app-navigation>
-  </ng-container>
+  <div class="main-body">
+    <div class="side-nav">
+      <h2>Nats-WebUI</h2>
+      <app-navigation></app-navigation>
+    </div>
+    <mat-divider vertical="true"></mat-divider>
+    <div class="right-div">
+      <div class="upper-div">
+          <button mat-button>Add Server</button>
+      </div>
+      <div class="lower-div">
+        <app-serverinformation></app-serverinformation>
+      </div>
+    </div>
+  </div>

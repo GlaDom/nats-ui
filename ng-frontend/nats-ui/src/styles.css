@@ -2,3 +2,7 @@
 * {
     font-family: Roboto;
 }
+
+html, body {
+    height: 100%;
+}
