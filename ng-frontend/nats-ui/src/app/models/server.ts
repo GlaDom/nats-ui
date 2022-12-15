@@ -9,4 +9,5 @@ export interface Server {
     bytesIn?: number;
     bytesOut?: number;
     status?: string ;
+    operations?: any;
 }

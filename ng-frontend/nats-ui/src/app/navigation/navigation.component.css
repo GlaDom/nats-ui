@@ -1,13 +1,7 @@
 .sidenav {
     width: 300px;
-    height: 300px;
-    background-color: blueviolet;
 }
 
 .mat-selection-list {
     overflow: hidden;
-}
-
-.mat-list-option[aria-selected="true"] {
-    background: grey;
 }

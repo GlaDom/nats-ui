@@ -1,9 +1,7 @@
-.server-talbe {
-    height: 100%;
-    width: 80%;
+.server-table {
+    width: 100%;
 }
 
-table {
-    height: 100%;
-    width: 100%;
+.mat-column {
+    border-color: red;
 }
