@@ -1,0 +1,44 @@
+<div class="server-dialog">
+    <h2 style="text-align: center;">Configure new NATS Server</h2>
+    <mat-divider></mat-divider>
+    <div class="server-name">
+        <span>Server Name</span>
+        <mat-form-field>
+            <mat-label>Server Name</mat-label>
+            <input class="server-form-element" matInput placeholder="Server Name">
+            <mat-icon matSuffix>clear</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="hostname">
+        <span>Hostname</span>
+        <mat-form-field>
+            <mat-label>Hostname</mat-label>
+            <input class="server-form-element" matInput placeholder="Hostname">
+            <mat-icon matSuffix>clear</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="message-port">
+        <span>Message Port</span>
+        <mat-form-field>
+            <mat-label>Message Port</mat-label>
+            <input class="server-form-element" matInput placeholder="Message Port">
+            <mat-icon matSuffix>clear</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="monitoring-port">
+        <span>Monitoring Port</span>
+        <mat-form-field>
+            <mat-label>Monitoring Port</mat-label>
+            <input class="server-form-element" matInput placeholder="Monitoring Port">
+            <mat-icon matSuffix>clear</mat-icon>
+        </mat-form-field>
+    </div>
+    <div class="action-container">
+        <button class="cancel-button" (click)="onNoClick()">
+            Cancel
+        </button>
+        <button class="save-button">
+            Save
+        </button>
+    </div>
+</div>
