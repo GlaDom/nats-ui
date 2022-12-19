@@ -6,7 +6,10 @@
     <mat-divider vertical="true"></mat-divider>
     <div class="right-div">
       <div class="upper-div">
-          <button>Add Server</button>
+          <button (click)="opendAddServerDialog()">
+            <mat-icon>add</mat-icon>
+            <span>Add Server</span>
+          </button>
       </div>
       <div class="lower-div">
         <app-serverinformation></app-serverinformation>
