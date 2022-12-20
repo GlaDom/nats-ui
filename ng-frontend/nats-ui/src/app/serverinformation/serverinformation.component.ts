@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { Server } from '../models/server';
+import { select, Store } from '@ngrx/store'
+import { ServerState } from '../store/server.reducers';
+import { LoadAllServers } from '../store/server.actions';
+import { getAllServers } from '../store/index';
 
 @Component({
   selector: 'app-serverinformation',
@@ -7,36 +12,29 @@ import { Server } from '../models/server';
   styleUrls: ['./serverinformation.component.css']
 })
 
-export class ServerinformationComponent {
-  dataSource: Server[]
-  displayedColumns: string[] = ["name", "hostname", "port", "monitoringPort", "connections", "messagesIn", "messagesOut", "bytesIn", "bytesOut", "status", "operations"]
+export class ServerinformationComponent implements OnInit {
+  dataSource: Server[];
+  servers$: Observable<Server[]>;
+  displayedColumns: string[] = [
+    "name", 
+    "hostname", 
+    "port", 
+    "monitoringPort", 
+    "connections", 
+    "messagesIn", 
+    "messagesOut", 
+    "bytesIn", 
+    "bytesOut", 
+    "status", 
+    "operations"
+  ]
 
-  constructor() {
-    this.dataSource = [
-      {
-        name: "nats-server",
-        hostname: "192.168.178.2",
-        port: 4222,
-        monitoringPort: 8222,
-        connections: 3,
-        messagesIn: 2402,
-        messagesOut: 422,
-        bytesIn: 23042,
-        bytesOut: 4322,
-        status: "online"
-      },
-      {
-        name: "nats-server2",
-        hostname: "192.168.178.3",
-        port: 4223,
-        monitoringPort: 8223,
-        connections: 4,
-        messagesIn: 2402,
-        messagesOut: 422,
-        bytesIn: 23042,
-        bytesOut: 4322,
-        status: "online"
-      }
-    ]
+  constructor(private store: Store<ServerState>) {
+
+  }
+
+  ngOnInit(): void {
+    this.store.dispatch(new LoadAllServers)
+    this.servers$ = this.store.pipe(select(getAllServers))
   }
 }
