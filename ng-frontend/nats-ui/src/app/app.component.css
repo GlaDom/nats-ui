@@ -19,4 +19,5 @@
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 50px 92%;
+    margin-left: 20px;
 }

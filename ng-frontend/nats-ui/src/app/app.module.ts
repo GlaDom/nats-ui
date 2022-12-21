@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ServerinformationComponent } from './serverinformation/serverinformation.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog'
 import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
@@ -38,6 +39,7 @@ import { ServerMonitoringComponent } from './server-monitoring/server-monitoring
     BrowserModule,
     FormsModule,
     MatButtonModule,
+    MatCardModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,
