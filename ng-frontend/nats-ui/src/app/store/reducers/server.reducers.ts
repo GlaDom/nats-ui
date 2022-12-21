@@ -1,5 +1,5 @@
-import { Server } from '../models/server'
-import { ActionTypes, ServerActions } from './server.actions';
+import { Server } from '../../models/server'
+import { ActionTypes, ServerActions } from '../actions/server.actions';
 
 export interface ServerState {
     servers: Server[];

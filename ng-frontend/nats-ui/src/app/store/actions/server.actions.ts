@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store'
-import { Server } from '../models/server'
+import { Server } from '../../models/server'
 
 export enum ActionTypes {
     LoadAllServers = '[Server] Load Servers',
