@@ -21,6 +21,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { AddserverdialogComponent } from './addserverdialog/addserverdialog.component';
 import { serverReducer } from './store/server.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ServerMonitoringComponent } from './server-monitoring/server-monitoring.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     NavigationComponent,
     ServerinformationComponent,
     AddserverdialogComponent,
+    ServerMonitoringComponent,
   ],
   imports: [
     AppRoutingModule,

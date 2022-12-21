@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog'
-import { AddserverdialogComponent } from './addserverdialog/addserverdialog.component';
 import { from } from 'rxjs';
 
 @Component({
@@ -11,11 +9,4 @@ import { from } from 'rxjs';
 export class AppComponent {
   title = 'nats-ui';
 
-  addServerDialogRef?: MatDialogRef<AddserverdialogComponent>;
-
-  constructor(private dialog: MatDialog) {}
-
-  opendAddServerDialog() {
-    this.addServerDialogRef = this.dialog.open(AddserverdialogComponent)
-  }
 }
