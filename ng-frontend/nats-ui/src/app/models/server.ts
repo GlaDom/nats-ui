@@ -1,5 +1,5 @@
 export interface Server {
-    name: string;
+    name?: string;
     hostname?: string;
     port?: number;
     monitoringPort?: number;
@@ -8,6 +8,6 @@ export interface Server {
     messagesOut?: number;
     bytesIn?: number;
     bytesOut?: number;
-    status?: string ;
+    status?: string;
     operations?: any;
 }

@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { FormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,6 +19,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { AddserverdialogComponent } from './addserverdialog/addserverdialog.component';
+import { serverReducer } from './store/server.reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 
 @NgModule({
@@ -26,8 +31,10 @@ import { AddserverdialogComponent } from './addserverdialog/addserverdialog.comp
     AddserverdialogComponent,
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    BrowserModule,
+    FormsModule,
     MatButtonModule,
     MatDialogModule,
     MatDividerModule,
@@ -38,6 +45,12 @@ import { AddserverdialogComponent } from './addserverdialog/addserverdialog.comp
     MatSidenavModule,
     MatTableModule,
     MatToolbarModule,
+    StoreModule.forRoot({
+      servers: serverReducer,
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 10
+    })
   ],
   entryComponents: [AddserverdialogComponent],
   providers: [
