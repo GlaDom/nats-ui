@@ -8,6 +8,6 @@ export interface Server {
     messagesOut?: number;
     bytesIn?: number;
     bytesOut?: number;
-    status?: string ;
+    status?: string;
     operations?: any;
 }

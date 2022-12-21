@@ -5,7 +5,7 @@
         <span>Server Name</span>
         <mat-form-field>
             <mat-label>Server Name</mat-label>
-            <input class="server-form-element" matInput placeholder="Server Name">
+            <input class="server-form-element" matInput placeholder="Server Name" [(ngModel)]="newServer.name">
             <mat-icon matSuffix>clear</mat-icon>
         </mat-form-field>
     </div>
@@ -13,7 +13,7 @@
         <span>Hostname</span>
         <mat-form-field>
             <mat-label>Hostname</mat-label>
-            <input class="server-form-element" matInput placeholder="Hostname">
+            <input class="server-form-element" matInput placeholder="Hostname" [(ngModel)]="newServer.hostname">
             <mat-icon matSuffix>clear</mat-icon>
         </mat-form-field>
     </div>
@@ -21,7 +21,7 @@
         <span>Message Port</span>
         <mat-form-field>
             <mat-label>Message Port</mat-label>
-            <input class="server-form-element" matInput placeholder="Message Port">
+            <input class="server-form-element" matInput placeholder="Message Port" [(ngModel)]="newServer.port">
             <mat-icon matSuffix>clear</mat-icon>
         </mat-form-field>
     </div>
@@ -29,7 +29,7 @@
         <span>Monitoring Port</span>
         <mat-form-field>
             <mat-label>Monitoring Port</mat-label>
-            <input class="server-form-element" matInput placeholder="Monitoring Port">
+            <input class="server-form-element" matInput placeholder="Monitoring Port" [(ngModel)]="newServer.monitoringPort">
             <mat-icon matSuffix>clear</mat-icon>
         </mat-form-field>
     </div>

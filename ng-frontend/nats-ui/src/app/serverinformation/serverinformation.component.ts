@@ -13,7 +13,6 @@ import { getAllServers } from '../store/index';
 })
 
 export class ServerinformationComponent implements OnInit {
-  dataSource: Server[];
   servers$: Observable<Server[]>;
   displayedColumns: string[] = [
     "name", 

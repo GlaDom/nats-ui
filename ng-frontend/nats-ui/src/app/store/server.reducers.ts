@@ -7,14 +7,7 @@ export interface ServerState {
 }
 
 export const initialState: ServerState = {
-    servers: [
-        {
-            "name": "test-server",
-            "hostname": "192.168.178.0.1",
-            "port": 4222,
-            "monitoringPort": 8222
-        }
-    ],
+    servers: [],
     selectedServer: {},
 }
 

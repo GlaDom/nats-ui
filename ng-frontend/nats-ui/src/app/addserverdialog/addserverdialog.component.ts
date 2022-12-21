@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ServerState } from '../store/server.reducers';
 import { Store } from '@ngrx/store' 
 import { Server } from '../models/server'
 import { AddServer } from '../store/server.actions';
+import { ServerinformationComponent } from '../serverinformation/serverinformation.component';
 
 @Component({
   selector: 'app-addserverdialog',
@@ -11,32 +12,20 @@ import { AddServer } from '../store/server.actions';
   styleUrls: ['./addserverdialog.component.css']
 })
 export class AddserverdialogComponent {
-  testServer: Server = {};
+  newServer: Server = {};
+
   constructor(
     public dialogRef: MatDialogRef<AddserverdialogComponent>,
     private store: Store<ServerState>
   ) {}
 
   onNoClick(): void {
+    this.newServer = {}
     this.dialogRef.close();
   }
 
   addServer(): void {
-    this.testServer = {
-      "name": "testServer",
-      "hostname": "192.168.178.0.2",
-      "port": 4222,
-      "monitoringPort": 8222,
-      "connections": 3,
-      "messagesIn": 34055,
-      "messagesOut": 245,
-      "bytesIn": 240422,
-      "bytesOut": 2404
-    }
-
-    console.log("das geht");
-
-    this.store.dispatch(new AddServer(this.testServer));
+    this.store.dispatch(new AddServer(this.newServer));
     this.dialogRef.close();
   }
 }
