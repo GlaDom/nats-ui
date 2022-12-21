@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ServerinformationComponent } from './serverinformation/serverinformation.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog'
 import {MatDividerModule} from '@angular/material/divider';
 import {MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
@@ -21,6 +22,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import { AddserverdialogComponent } from './addserverdialog/addserverdialog.component';
 import { serverReducer } from './store/server.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { ServerMonitoringComponent } from './server-monitoring/server-monitoring.component';
 
 
 @NgModule({
@@ -29,6 +31,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     NavigationComponent,
     ServerinformationComponent,
     AddserverdialogComponent,
+    ServerMonitoringComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -36,6 +39,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     BrowserModule,
     FormsModule,
     MatButtonModule,
+    MatCardModule,
     MatDialogModule,
     MatDividerModule,
     MatFormFieldModule,

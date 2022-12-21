@@ -5,6 +5,10 @@ import { select, Store } from '@ngrx/store'
 import { ServerState } from '../store/server.reducers';
 import { LoadAllServers } from '../store/server.actions';
 import { getAllServers } from '../store/index';
+import { AddserverdialogComponent } from '../addserverdialog/addserverdialog.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog'
+
+
 
 @Component({
   selector: 'app-serverinformation',
@@ -28,12 +32,20 @@ export class ServerinformationComponent implements OnInit {
     "operations"
   ]
 
-  constructor(private store: Store<ServerState>) {
+  addServerDialogRef?: MatDialogRef<AddserverdialogComponent>;
+
+  constructor(
+    private store: Store<ServerState>,
+    private dialog: MatDialog) {
 
   }
 
   ngOnInit(): void {
     this.store.dispatch(new LoadAllServers)
     this.servers$ = this.store.pipe(select(getAllServers))
+  }
+
+  opendAddServerDialog() {
+    this.addServerDialogRef = this.dialog.open(AddserverdialogComponent)
   }
 }

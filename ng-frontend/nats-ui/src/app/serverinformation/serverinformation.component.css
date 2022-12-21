@@ -5,3 +5,26 @@
 .mat-column {
     border-color: red;
 }
+
+.upper-div {
+    margin-right: 10px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.lower-div {
+    margin: 10px;
+}
+
+button {
+    height: 40px;
+    width: 130px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+    background-color: #49454F;
+    color: white;
+    border-radius: 20px;
+    border-color: #49454F;
+}

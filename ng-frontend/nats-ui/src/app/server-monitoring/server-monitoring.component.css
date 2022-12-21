@@ -1,0 +1,107 @@
+.global-container {
+    display: grid;
+    grid-template-columns: auto 256px;
+    grid-template-rows: 100%;
+}
+
+.left-container {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 56px 84px 217px 200px 120px;
+}
+
+.right-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-tree {
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.charts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+}
+
+.key-values {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 50% 50%;
+}
+
+.upper-key-values {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto;
+    justify-content: space-between;
+}
+
+.lower-key-values {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto;
+    justify-content: space-between;
+}
+
+.meta-data {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+    grid-template-rows: auto;
+    justify-content: space-between;
+}
+
+.server-title {
+    font-weight: 600;
+    font-size: 40pt;
+}
+
+.server-ip {
+    margin-left: 20px;
+    font-weight: 600;
+    font-size: 14pt;
+}
+
+.card-title {
+    font-weight: 900;
+    font-size: 14pt;
+    color: #D2D2D2;
+}
+
+.values {
+    font-weight: 600;
+    font-size: 30pt;
+}
+
+.small-card-title {
+    font-weight: 600;
+    font-size: 14;
+    color: #D2D2D2;
+}
+
+.meta-values {
+    font-weight: 600;
+    font-size: 16pt;
+}
+
+.meta-card {
+    width: 180px;
+    height: 80px;
+}
+
+mat-card {
+    width: 220px;
+    height: 95px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+span {
+    margin-left: 10px;
+}
