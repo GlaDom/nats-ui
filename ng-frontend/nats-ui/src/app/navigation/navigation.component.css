@@ -5,3 +5,7 @@
 .mat-selection-list {
     overflow: hidden;
 }
+
+span {
+    font-weight: 600;
+}

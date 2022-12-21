@@ -1,6 +1,6 @@
 <div>
     <mat-sidenav-container class="sidenav">
-        <p>Servers</p>
+        <span (click)="setShowServerInformation()">Servers</span>
         <mat-selection-list [multiple]="false">
             <mat-list-option *ngFor="let server of servers">
                 {{server}}

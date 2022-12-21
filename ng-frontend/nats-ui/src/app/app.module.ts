@@ -20,7 +20,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { AddserverdialogComponent } from './addserverdialog/addserverdialog.component';
-import { serverReducer } from './store/server.reducers';
+import { serverReducer } from './store/reducers/server.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ServerMonitoringComponent } from './server-monitoring/server-monitoring.component';
 

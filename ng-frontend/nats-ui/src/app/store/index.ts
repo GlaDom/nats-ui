@@ -7,3 +7,8 @@ export const getAllServers = createSelector(
     getServerState,
     (state: ServerState) => state.servers
 );
+
+export const getShowServerInformation = createSelector(
+    getServerState,
+    (state: ServerState) => state.showServerInformation
+)

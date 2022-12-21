@@ -5,8 +5,11 @@ export enum ActionTypes {
     LoadAllServers = '[Server] Load Servers',
 
     LoadSingleServer = '[Server] Load Single Server',
+    LoadShowServerInformation = '[Server] Load Show Server',
 
     AddServer = '[Server] Add Server',
+    
+    UpdateShowServerInforamtion = '[Server] Update Show Server'
 }
 
 export class LoadAllServers implements Action {
@@ -23,7 +26,18 @@ export class AddServer implements Action {
     constructor(public payload: Server) {}
 }
 
+export class LoadShowServerInformation implements Action {
+    readonly type = ActionTypes.LoadShowServerInformation
+}
+
+export class UpdateShowServerInforamtion implements Action {
+    readonly type = ActionTypes.UpdateShowServerInforamtion
+    constructor(public payload: boolean) {}
+}
+
 export type ServerActions = 
     | LoadAllServers
     | LoadSingleServer 
-    | AddServer;
+    | LoadShowServerInformation
+    | AddServer
+    | UpdateShowServerInforamtion;
