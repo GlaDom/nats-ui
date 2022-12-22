@@ -1,11 +1,11 @@
   <div class="main-body">
     <div class="side-nav">
       <h2>Nats-WebUI</h2>
-      <app-navigation></app-navigation>
+      <app-navigation [showServerInformation]="showServerInformation$" [showServerMonitoring]="showServerMonitoring$"></app-navigation>
     </div>
     <mat-divider vertical="true"></mat-divider>
     <div class="right-div">
-      <app-server-monitoring></app-server-monitoring>
-      <!-- <app-serverinformation></app-serverinformation> -->
+      <app-server-monitoring *ngIf="showServerMonitoring$"></app-server-monitoring>
+      <app-serverinformation *ngIf="showServerInformation$"></app-serverinformation>
     </div>
   </div>

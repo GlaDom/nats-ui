@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { Server } from '../models/server';
 import { select, Store } from '@ngrx/store'
-import { ServerState } from '../store/server.reducers';
-import { LoadAllServers } from '../store/server.actions';
+import { ServerState } from '../store/reducers/server.reducers';
+import { LoadAllServers } from '../store/actions/server.actions';
 import { getAllServers } from '../store/index';
 import { AddserverdialogComponent } from '../addserverdialog/addserverdialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog'
