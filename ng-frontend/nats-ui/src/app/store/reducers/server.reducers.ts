@@ -5,12 +5,14 @@ export interface ServerState {
     servers: Server[];
     selectedServer: Server;
     showServerInformation: boolean;
+    showServerMonitoring: boolean;
 }
 
 export const initialState: ServerState = {
     servers: [],
     selectedServer: {},
-    showServerInformation: false
+    showServerInformation: false,
+    showServerMonitoring: false
 }
 
 export function serverReducer(
@@ -22,7 +24,7 @@ export function serverReducer(
         case ActionTypes.LoadAllServers: {
             return state
         }
-
+        
         case ActionTypes.LoadSingleServer: {
             return {
                 ...state,
@@ -45,6 +47,13 @@ export function serverReducer(
             return {
                 ...state,
                 showServerInformation: action.payload
+            }
+        }
+
+        case ActionTypes.UpdateShowServerMonitoring: {
+            return {
+                ...state,
+                showServerMonitoring: action.payload
             }
         }
 

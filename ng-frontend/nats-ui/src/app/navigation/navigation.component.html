@@ -1,8 +1,8 @@
 <div>
     <mat-sidenav-container class="sidenav">
         <span (click)="setShowServerInformation()">Servers</span>
-        <mat-selection-list [multiple]="false">
-            <mat-list-option *ngFor="let server of servers">
+        <mat-selection-list [multiple]="false" [(ngModel)]="selectedServer" (ngModelChange)="onNgModelChange($event)">
+            <mat-list-option *ngFor="let server of servers" [value]="server">
                 {{server}}
             </mat-list-option>
         </mat-selection-list>
