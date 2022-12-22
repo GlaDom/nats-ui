@@ -131,7 +131,6 @@ type Varz struct {
 	Subscriptions    int       `json:"subscriptions"`
 	HTTPReqStats     struct {
 		NAMING_FAILED int `json:"/"`
-		Jsz           int `json:"/jsz"`
 		Varz          int `json:"/varz"`
 	} `json:"http_req_stats"`
 	ConfigLoadTime time.Time `json:"config_load_time"`

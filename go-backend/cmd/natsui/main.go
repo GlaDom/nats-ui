@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"net/http"
 	"time"
 
@@ -24,6 +26,44 @@ func main() {
 
 	router.POST("/run", func(c *gin.Context) {
 
+	})
+
+	router.GET("/api/state/server/status", func(ctx *gin.Context) {
+		server := app.NatsServer{}
+		if err := ctx.BindJSON(&server); err != nil {
+			ctx.AbortWithError(http.StatusBadRequest, err)
+			return
+		}
+
+		httpClient := http.Client{}
+		req, err := http.NewRequest("GET", fmt.Sprintf("http://%s:%v/varz", server.Host, server.MonitoringPort), nil)
+		if err != nil {
+			err := fmt.Errorf("failed to create request for varz, err:%s", err)
+			ctx.AbortWithError(http.StatusBadRequest, err)
+			return
+		}
+
+		res, err := httpClient.Do(req)
+		if err != nil {
+			err := fmt.Errorf("failed to get for varz, err:%s", err)
+			ctx.AbortWithError(http.StatusBadRequest, err)
+			return
+		}
+
+		body, err := ioutil.ReadAll(res.Body)
+		if err != nil {
+			err := fmt.Errorf("failed to get for varz, err:%s", err)
+			ctx.AbortWithError(http.StatusBadRequest, err)
+		}
+
+		fmt.Print(string(body))
+		if err := json.Unmarshal(body, &server.Varz); err != nil {
+			err := fmt.Errorf("failed to unmarshal response for varz, err:%s", err)
+			ctx.AbortWithError(http.StatusInternalServerError, err)
+			return
+		}
+
+		ctx.IndentedJSON(http.StatusOK, server)
 	})
 
 	router.POST("/api/state/server/new", func(ctx *gin.Context) {
