@@ -22,6 +22,7 @@ export class NavigationComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new LoadAllServers)
     this.store.pipe(select(getAllServers)).subscribe(state => {
+      this.servers = [];
       for (let i = 0; i <  state.length; i++)  {
         this.servers.push(state[i].name)         
       }
@@ -39,7 +40,7 @@ export class NavigationComponent implements OnInit {
   }
 
   onNgModelChange(event) {
-    this.store.dispatch(new UpdateShowServerInforamtion(!this.showServerInformation))
+    this.store.dispatch(new UpdateShowServerInforamtion(false))
     this.store.dispatch(new UpdateShowServerMonitoring(true))
     console.log(event)
   }
