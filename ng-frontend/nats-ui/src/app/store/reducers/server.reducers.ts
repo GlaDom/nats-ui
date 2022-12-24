@@ -1,18 +1,25 @@
+import { ServerStats } from 'src/app/models/server-monitoring.model';
 import { Server } from '../../models/server'
-import { ActionTypes, ServerActions } from '../actions/server.actions';
+import { ActionTypes, AddServerSuccess, ServerActions } from '../actions/server.actions';
 
 export interface ServerState {
     servers: Server[];
     selectedServer: Server;
     showServerInformation: boolean;
     showServerMonitoring: boolean;
+    serverMonitoring: ServerStats;
 }
 
 export const initialState: ServerState = {
     servers: [],
     selectedServer: {},
     showServerInformation: false,
-    showServerMonitoring: false
+    showServerMonitoring: false,
+    serverMonitoring: {
+        serverMonitoring: null,
+        error: null,
+        status: 'pending'
+    }
 }
 
 export function serverReducer(
@@ -41,6 +48,17 @@ export function serverReducer(
                 ...state,
                 servers: [...state.servers, action.payload]
             }
+        }
+
+        case ActionTypes.AddServerSuccess: {
+            state.servers[state.servers.length-1].status = 'connected'
+            return state
+        }
+
+        case ActionTypes.AddServerFailure: {
+            //state.servers[state.servers.length-1].status = 'disconnected'
+            console.log(state.servers)
+            return state
         }
 
         case ActionTypes.UpdateShowServerInforamtion: {
