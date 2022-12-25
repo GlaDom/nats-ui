@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/GlaDom/nats-ui/internal/app"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/nats-io/nats.go"
 )
@@ -23,20 +24,31 @@ func main() {
 	}()
 
 	router := gin.Default()
+	router.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"http://localhost:4200"},
+		AllowMethods: []string{"GET", "POST"},
+	}))
 
 	router.POST("/run", func(c *gin.Context) {
 
 	})
 
 	router.GET("/api/state/server/status", func(ctx *gin.Context) {
-		server := app.NatsServer{}
-		if err := ctx.BindJSON(&server); err != nil {
-			ctx.AbortWithError(http.StatusBadRequest, err)
+		retval := app.NatsServer{}
+		serverHost, ok := ctx.GetQuery("hostname")
+		if !ok {
+			ctx.AbortWithError(http.StatusBadRequest, fmt.Errorf("no hostname provided"))
+			return
+		}
+
+		monitoringPort, ok := ctx.GetQuery("monitoringPort")
+		if !ok {
+			ctx.AbortWithError(http.StatusBadRequest, fmt.Errorf("no monitoringPort provided"))
 			return
 		}
 
 		httpClient := http.Client{}
-		req, err := http.NewRequest("GET", fmt.Sprintf("http://%s:%v/varz", server.Host, server.MonitoringPort), nil)
+		req, err := http.NewRequest("GET", fmt.Sprintf("http://%s:%v/varz", serverHost, monitoringPort), nil)
 		if err != nil {
 			err := fmt.Errorf("failed to create request for varz, err:%s", err)
 			ctx.AbortWithError(http.StatusBadRequest, err)
@@ -57,13 +69,13 @@ func main() {
 		}
 
 		fmt.Print(string(body))
-		if err := json.Unmarshal(body, &server.Varz); err != nil {
+		if err := json.Unmarshal(body, &retval.Varz); err != nil {
 			err := fmt.Errorf("failed to unmarshal response for varz, err:%s", err)
 			ctx.AbortWithError(http.StatusInternalServerError, err)
 			return
 		}
 
-		ctx.IndentedJSON(http.StatusOK, server)
+		ctx.IndentedJSON(http.StatusOK, retval)
 	})
 
 	router.POST("/api/state/server/new", func(ctx *gin.Context) {
