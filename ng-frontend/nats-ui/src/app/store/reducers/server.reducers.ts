@@ -51,8 +51,10 @@ export function serverReducer(
         }
 
         case ActionTypes.AddServerSuccess: {
-            state.servers[state.servers.length-1].status = 'connected'
-            return state
+            //state.servers.map(())
+            return {
+                ...state, 
+            }
         }
 
         case ActionTypes.AddServerFailure: {

@@ -18,10 +18,10 @@ export class ServerEffects {
     //Run this code when a AddServer action is dispachted
     addServer$ = createEffect(() => 
         this.actions$.pipe(
-            ofType(ActionTypes.AddServer),
-            switchMap((server) =>
-                from(this.serverService.getStatusOfServer(server, "http://172.18.0.2:8222/varz")).pipe(
-                    map(() => new AddServerSuccess()),
+            ofType<AddServer>(ActionTypes.AddServer),
+            switchMap((action) => 
+                from(this.serverService.getStatusOfServer(action.payload, "http://localhost:8080/api/state/server/status")).pipe(
+                    map((data) => new AddServerSuccess(data)),
                     catchError(async () => new AddServerFailure())
                 ))
         ));

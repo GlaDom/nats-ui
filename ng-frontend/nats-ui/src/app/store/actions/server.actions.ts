@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store'
+import { ServerMonitoring } from 'src/app/models/server-monitoring.model'
 import { Server } from '../../models/server'
 
 export enum ActionTypes {
@@ -32,6 +33,7 @@ export class AddServer implements Action {
 
 export class AddServerSuccess implements Action {
     readonly type = ActionTypes.AddServerSuccess
+    constructor(public payload: ServerMonitoring) {}
 }
 
 export class AddServerFailure implements Action {
