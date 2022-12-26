@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store'
+import { ServerMonitoring } from 'src/app/models/server-monitoring.model'
 import { Server } from '../../models/server'
 
 export enum ActionTypes {
@@ -9,6 +10,8 @@ export enum ActionTypes {
     LoadShowServerInformation = '[Server] Load Show Server',
 
     AddServer = '[Server] Add Server',
+    AddServerSuccess = '[Server] Add Server Success',
+    AddServerFailure = '[Server] Add Server Failure',
     
     UpdateShowServerInforamtion = '[Server] Update Show Server',
     UpdateShowServerMonitoring = '[Server] Update Show Server Monitoring'
@@ -26,6 +29,15 @@ export class LoadSingleServer implements Action {
 export class AddServer implements Action {
     readonly type = ActionTypes.AddServer
     constructor(public payload: Server) {}
+}
+
+export class AddServerSuccess implements Action {
+    readonly type = ActionTypes.AddServerSuccess
+    constructor(public payload: ServerMonitoring) {}
+}
+
+export class AddServerFailure implements Action {
+    readonly type = ActionTypes.AddServerFailure 
 }
 
 export class LoadShowServerInformation implements Action {
@@ -47,5 +59,7 @@ export type ServerActions =
     | LoadSingleServer 
     | LoadShowServerInformation
     | AddServer
+    | AddServerSuccess
+    | AddServerFailure
     | UpdateShowServerInforamtion
     | UpdateShowServerMonitoring;

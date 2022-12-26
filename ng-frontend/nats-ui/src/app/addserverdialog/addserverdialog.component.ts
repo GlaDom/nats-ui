@@ -12,7 +12,14 @@ import { ServerinformationComponent } from '../serverinformation/serverinformati
   styleUrls: ['./addserverdialog.component.css']
 })
 export class AddserverdialogComponent {
-  newServer: Server = {};
+  newServer: Server = {
+    connections: 0,
+    messagesIn: 0,
+    messagesOut: 0,
+    bytesIn: 0,
+    bytesOut: 0,
+    status: 'pending'
+  };
 
   constructor(
     public dialogRef: MatDialogRef<AddserverdialogComponent>,

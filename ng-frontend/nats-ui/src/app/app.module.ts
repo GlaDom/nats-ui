@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store'
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +24,9 @@ import { AddserverdialogComponent } from './addserverdialog/addserverdialog.comp
 import { serverReducer } from './store/reducers/server.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ServerMonitoringComponent } from './server-monitoring/server-monitoring.component';
+import { ServerService } from './services/server.service';
+import { EffectsModule } from '@ngrx/effects';
+import { ServerEffects } from './store/effects/server.effects';
 
 
 @NgModule({
@@ -38,6 +42,7 @@ import { ServerMonitoringComponent } from './server-monitoring/server-monitoring
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
@@ -54,11 +59,13 @@ import { ServerMonitoringComponent } from './server-monitoring/server-monitoring
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 10
-    })
+    }),
+    EffectsModule.forRoot([ServerEffects])
   ],
   entryComponents: [AddserverdialogComponent],
   providers: [
-    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}}
+    {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
+    ServerService
   ],
   bootstrap: [AppComponent]
 })
