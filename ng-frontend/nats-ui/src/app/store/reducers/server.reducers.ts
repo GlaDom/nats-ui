@@ -51,16 +51,32 @@ export function serverReducer(
         }
 
         case ActionTypes.AddServerSuccess: {
-            //state.servers.map(())
+            const index = state.servers.findIndex(server => server.hostname == action.payload.host)
+            const newServerArray: Server[] = [];
+            state.servers.forEach(server => {
+                console.log(server)
+                newServerArray.push(Object.assign({}, server))})
+            console.log(action.payload)
+            newServerArray[index].status = 'connected'
+            newServerArray[index].connections = action.payload.varz.connections
+            newServerArray[index].bytesIn = action.payload.varz.in_bytes
+            newServerArray[index].bytesOut = action.payload.varz.out_bytes
+            newServerArray[index].messagesIn = action.payload.varz.in_msgs
+            newServerArray[index].messagesIn = action.payload.varz.out_msgs
             return {
                 ...state, 
+                servers: newServerArray
             }
         }
 
         case ActionTypes.AddServerFailure: {
-            //state.servers[state.servers.length-1].status = 'disconnected'
-            console.log(state.servers)
-            return state
+            const newServerArray: Server[] = [];
+            state.servers.forEach(server => newServerArray.push(Object.assign({}, server)))
+            newServerArray[state.servers.length-1].status = 'disconnected'
+            return {
+                ...state,
+                servers: newServerArray
+            }
         }
 
         case ActionTypes.UpdateShowServerInforamtion: {

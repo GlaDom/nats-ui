@@ -5,6 +5,16 @@ export interface ServerStats {
 }
 
 export interface ServerMonitoring {
+    id:             number;
+    name:           string;
+    host:           string;
+    port:           number;
+    monitoringport: number;
+    varz:           Varz;
+    subz:           null;
+}
+
+export interface Varz {
     server_id:         string;
     server_name:       string;
     version:           string;
@@ -59,6 +69,7 @@ export interface Cluster {
 }
 
 export interface HTTPReqStats {
+    "/":     number;
     "/varz": number;
 }
 
