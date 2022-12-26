@@ -40,6 +40,7 @@ func main() {
 			ctx.AbortWithError(http.StatusBadRequest, fmt.Errorf("no hostname provided"))
 			return
 		}
+		retval.Host = serverHost
 
 		monitoringPort, ok := ctx.GetQuery("monitoringPort")
 		if !ok {
