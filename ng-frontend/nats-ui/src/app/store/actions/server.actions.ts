@@ -9,10 +9,15 @@ export enum ActionTypes {
     LoadSingleServer = '[Server] Load Single Server',
     LoadShowServerInformation = '[Server] Load Show Server',
 
+    LoadServerMonitoringStats = '[Server] Load Server Monitoring',
+    LoadServerMonitoringStatsSuccess = '[Server] Load Server Monitoring Stats Success',
+    LoadServerMonitoringStatsFailure = '[Server] Load Server Monitoring Stats Failure',
+
     AddServer = '[Server] Add Server',
     AddServerSuccess = '[Server] Add Server Success',
     AddServerFailure = '[Server] Add Server Failure',
     
+    UpdateSelectedServer = '[Server] Update Selected Server',
     UpdateShowServerInforamtion = '[Server] Update Show Server',
     UpdateShowServerMonitoring = '[Server] Update Show Server Monitoring'
 }
@@ -24,6 +29,20 @@ export class LoadAllServers implements Action {
 export class LoadSingleServer implements Action {
     readonly type = ActionTypes.LoadSingleServer
     constructor(public payload: number) {}
+}
+
+export class LoadServerMonitoringStats implements Action {
+    readonly type = ActionTypes.LoadServerMonitoringStats
+    constructor(public payload: Server) {}
+}
+
+export class LoadServerMonitoringStatsSuccess implements Action {
+    readonly type = ActionTypes.LoadServerMonitoringStatsSuccess
+    constructor(public payload: ServerMonitoring) {}
+}
+
+export class LoadServerMonitoringStatsFailure implements Action {
+    readonly type = ActionTypes.LoadServerMonitoringStatsFailure
 }
 
 export class AddServer implements Action {
@@ -44,6 +63,11 @@ export class LoadShowServerInformation implements Action {
     readonly type = ActionTypes.LoadShowServerInformation
 }
 
+export class UpdateSelectedServer implements Action {
+    readonly type = ActionTypes.UpdateSelectedServer
+    constructor(public payload: string) {}
+}
+
 export class UpdateShowServerInforamtion implements Action {
     readonly type = ActionTypes.UpdateShowServerInforamtion
     constructor(public payload: boolean) {}
@@ -58,8 +82,12 @@ export type ServerActions =
     | LoadAllServers
     | LoadSingleServer 
     | LoadShowServerInformation
+    | LoadServerMonitoringStats
+    | LoadServerMonitoringStatsSuccess
+    | LoadServerMonitoringStatsFailure
     | AddServer
     | AddServerSuccess
     | AddServerFailure
+    | UpdateSelectedServer
     | UpdateShowServerInforamtion
     | UpdateShowServerMonitoring;

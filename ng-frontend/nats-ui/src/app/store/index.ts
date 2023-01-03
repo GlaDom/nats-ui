@@ -18,3 +18,13 @@ export const getShowServerMonitoring = createSelector(
     getServerState,
     (state: ServerState) => state.showServerMonitoring
 )
+
+export const getSelectedServer = createSelector(
+    getServerState,
+    (state: ServerState) => state.selectedServer
+)
+
+export const getServerMonitoringStats = createSelector(
+    getServerState,
+    (state: ServerState) => state.serverMonitoring.serverMonitoring
+)

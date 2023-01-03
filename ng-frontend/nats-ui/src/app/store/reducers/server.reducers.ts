@@ -1,6 +1,6 @@
 import { ServerStats } from 'src/app/models/server-monitoring.model';
 import { Server } from '../../models/server'
-import { ActionTypes, AddServerSuccess, ServerActions } from '../actions/server.actions';
+import { ActionTypes, AddServerSuccess, ServerActions, UpdateSelectedServer } from '../actions/server.actions';
 
 export interface ServerState {
     servers: Server[];
@@ -43,6 +43,30 @@ export function serverReducer(
             return state
         }
 
+        case ActionTypes.LoadServerMonitoringStats: {
+            return state
+        }
+
+        case ActionTypes.LoadServerMonitoringStatsSuccess: {
+            console.log(action.payload)
+            const newServerMonitoring = Object.assign({}, state.serverMonitoring);
+            newServerMonitoring.serverMonitoring = action.payload
+            newServerMonitoring.status = 'success'
+            return {
+                ...state,
+                serverMonitoring: newServerMonitoring
+            }
+        }
+
+        case ActionTypes.LoadServerMonitoringStatsFailure: {
+            let newServerMonitoring =  state.serverMonitoring
+            newServerMonitoring.error = 'failure'
+            return {
+                ...state,
+                serverMonitoring: newServerMonitoring
+            }
+        }
+
         case ActionTypes.AddServer: {
             return {
                 ...state,
@@ -51,12 +75,10 @@ export function serverReducer(
         }
 
         case ActionTypes.AddServerSuccess: {
-            const index = state.servers.findIndex(server => server.hostname == action.payload.host)
+            const index = state.servers.findIndex(server => server.host == action.payload.host)
             const newServerArray: Server[] = [];
             state.servers.forEach(server => {
-                console.log(server)
                 newServerArray.push(Object.assign({}, server))})
-            console.log(action.payload)
             newServerArray[index].status = 'connected'
             newServerArray[index].connections = action.payload.varz.connections
             newServerArray[index].bytesIn = action.payload.varz.in_bytes
@@ -76,6 +98,15 @@ export function serverReducer(
             return {
                 ...state,
                 servers: newServerArray
+            }
+        }
+
+        case ActionTypes.UpdateSelectedServer: {
+            const index = state.servers.findIndex(server => server.name == action.payload)
+            const newSelectedServer = state.servers[index]
+            return {
+                ...state,
+                selectedServer: newSelectedServer
             }
         }
 
