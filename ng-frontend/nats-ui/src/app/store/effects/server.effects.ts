@@ -4,7 +4,7 @@ import { Store } from "@ngrx/store";
 import { catchError, from, map, switchMap } from "rxjs";
 import { Server } from "src/app/models/server";
 import { ServerService } from "src/app/services/server.service";
-import { ActionTypes, AddServer, AddServerFailure, AddServerSuccess, LoadServerMonitoringStats, LoadServerMonitoringStatsFailure, LoadServerMonitoringStatsSuccess } from "../actions/server.actions";
+import { ActionTypes, AddServer, AddServerFailure, AddServerSuccess, DeleteServer, DeleteServerFailure, DeleteServerSuccess, LoadServerMonitoringStats, LoadServerMonitoringStatsFailure, LoadServerMonitoringStatsSuccess } from "../actions/server.actions";
 import { ServerState } from "../reducers/server.reducers";
 
 @Injectable()
@@ -33,6 +33,16 @@ export class ServerEffects {
                 from(this.serverService.getServerMonitoringStats(action.payload, "http://localhost:8080/api/state/server/monitoring")).pipe(
                     map((data) => new LoadServerMonitoringStatsSuccess(data),
                     catchError(async () => new LoadServerMonitoringStatsFailure()))
+                ))
+        ))
+
+    deleteServer = createEffect(() => 
+        this.actions$.pipe(
+            ofType<DeleteServer>(ActionTypes.DeleteServer),
+            switchMap((action) =>
+                from(this.serverService.deleteServer(action.payload, "http://localhost:8080/api/state/server/delete")).pipe(
+                    map((data) => new DeleteServerSuccess(data),
+                    catchError(async () => new DeleteServerFailure()))
                 ))
         ))
 }

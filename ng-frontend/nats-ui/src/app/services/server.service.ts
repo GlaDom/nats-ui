@@ -24,4 +24,14 @@ export class ServerService {
 
     return this.http.get<ServerMonitoring>(url, {params})
   }
+
+  deleteServer(server: Server, url:string) {
+    let params = new HttpParams();
+
+    if(server.host != "") {
+      params = params.append("hostname", server.host)
+    }
+
+    return this.http.delete<Server>(url, {params})
+  }
 }

@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"sync"
 )
 
 type App struct {
+	Mu      sync.Mutex
 	Servers []NatsServer
 	Clients []Client
 }

@@ -3,7 +3,7 @@ import { map, Observable } from 'rxjs';
 import { Server } from '../models/server';
 import { select, Store } from '@ngrx/store'
 import { ServerState } from '../store/reducers/server.reducers';
-import { LoadAllServers } from '../store/actions/server.actions';
+import { DeleteServer, LoadAllServers } from '../store/actions/server.actions';
 import { getAllServers } from '../store/index';
 import { AddserverdialogComponent } from '../addserverdialog/addserverdialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog'
@@ -47,5 +47,10 @@ export class ServerinformationComponent implements OnInit {
 
   opendAddServerDialog() {
     this.addServerDialogRef = this.dialog.open(AddserverdialogComponent)
+  }
+
+  deleteServer(server: Server): void {
+    this.store.dispatch(new DeleteServer(server))
+    this.store.dispatch(new LoadAllServers)
   }
 }
