@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { Server } from '../models/server';
 import { getAllServers } from '../store';
-import { LoadAllServers, UpdateShowServerInforamtion, UpdateShowServerMonitoring } from '../store/actions/server.actions';
+import { LoadAllServers, UpdateSelectedServer, UpdateShowServerInforamtion, UpdateShowServerMonitoring } from '../store/actions/server.actions';
 import { ServerState } from '../store/reducers/server.reducers';
 
 @Component({
@@ -36,12 +38,14 @@ export class NavigationComponent implements OnInit {
     if (this.showServerMonitoring) {
       this.store.dispatch(new UpdateShowServerMonitoring(!this.showServerMonitoring))
     }
-    this.selectedServer = ""
+    this.selectedServer = "";
+    console.log(this.selectedServer)
   }
 
-  onNgModelChange(event) {
+  onNgModelChange(event: string) {
     this.store.dispatch(new UpdateShowServerInforamtion(false))
     this.store.dispatch(new UpdateShowServerMonitoring(true))
+    this.store.dispatch(new UpdateSelectedServer(event))
     console.log(event)
   }
 

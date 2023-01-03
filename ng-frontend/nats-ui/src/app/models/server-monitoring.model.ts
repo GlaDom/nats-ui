@@ -5,13 +5,13 @@ export interface ServerStats {
 }
 
 export interface ServerMonitoring {
-    id:             number;
-    name:           string;
-    host:           string;
-    port:           number;
-    monitoringport: number;
-    varz:           Varz;
-    subz:           null;
+    id?:             number;
+    name?:           string;
+    host?:           string;
+    port?:           number;
+    monitoringport?: number;
+    varz?:           Varz;
+    subz?:           null;
 }
 
 export interface Varz {

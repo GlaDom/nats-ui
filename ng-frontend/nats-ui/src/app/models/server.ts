@@ -1,6 +1,6 @@
 export interface Server {
     name?: string;
-    hostname?: string;
+    host?: string;
     port?: number;
     monitoringPort?: number;
     connections?: number;

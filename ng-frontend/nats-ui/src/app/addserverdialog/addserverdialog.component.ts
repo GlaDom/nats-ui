@@ -18,7 +18,7 @@ export class AddserverdialogComponent {
     messagesOut: 0,
     bytesIn: 0,
     bytesOut: 0,
-    status: 'pending'
+    status: 'pending',
   };
 
   constructor(
