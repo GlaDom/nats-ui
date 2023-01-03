@@ -16,36 +16,37 @@ func NewApp() *App {
 	return &App{}
 }
 
-func (a *App) Run() {
-	for i, s := range a.Servers {
-		fmt.Println(s.Name)
-		s.Varz = a.getVarz(i)
-		fmt.Printf("%v", s.Varz)
+func (a *App) UpdateVarz(s NatsServer) (*Varz, error) {
+	newVarz, err := a.getVarz(s)
+	if err != nil {
+		return nil, err
 	}
+	fmt.Println(newVarz)
+	return &newVarz, nil
 }
 
-func (a *App) getVarz(index int) *Varz {
-	var retval *Varz
+func (a *App) getVarz(s NatsServer) (Varz, error) {
+	var retval Varz
 	httpClient := http.Client{}
 
-	req, err := http.NewRequest("GET", fmt.Sprintf("http://%s:%v/varz", a.Servers[index].Host, a.Servers[index].MonitoringPort), nil)
+	req, err := http.NewRequest("GET", fmt.Sprintf("http://%s:%v/varz", s.Host, s.MonitoringPort), nil)
 	if err != nil {
-		fmt.Print("failed to create request for endpoint /varz", err)
+		return Varz{}, fmt.Errorf("failed to create request for endpoint /varz, err: %s", err)
 	}
 
 	res, err := httpClient.Do(req)
 	if err != nil {
-		fmt.Println("failed to execute request for endpoint /varz", err)
+		return Varz{}, fmt.Errorf("failed to execute request for endpoint /varz, err: %s", err)
 	}
 
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
-		fmt.Println("failed to read body", err)
+		return Varz{}, fmt.Errorf("failed to read body, err: %s", err)
 	}
 
 	if err := json.Unmarshal(body, &retval); err != nil {
-		fmt.Print(err)
+		return Varz{}, err
 	}
 
-	return retval
+	return retval, nil
 }
