@@ -15,6 +15,7 @@ func main() {
 
 	go func(st *app.App) {
 		for {
+			state.Mu.Lock()
 			for i, s := range st.Servers {
 				newVarz, err := st.UpdateVarz(s)
 				if err != nil {
@@ -22,6 +23,7 @@ func main() {
 				}
 				state.Servers[i].Varz = newVarz
 			}
+			state.Mu.Unlock()
 			fmt.Println(state.Servers)
 			time.Sleep(time.Second * 5)
 		}
@@ -30,7 +32,7 @@ func main() {
 	router := gin.Default()
 	router.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"http://localhost:4200"},
-		AllowMethods: []string{"GET", "POST"},
+		AllowMethods: []string{"GET", "POST", "DELETE"},
 		AllowHeaders: []string{"Origin", "Content-Type"},
 	}))
 
@@ -62,21 +64,27 @@ func main() {
 		ctx.JSON(http.StatusOK, &retval)
 	})
 
-	router.DELETE("/api/state/server/delete/:index", func(ctx *gin.Context) {
-		uri := app.Uri{}
-		if err := ctx.BindJSON(&uri); err != nil {
-			ctx.AbortWithError(http.StatusBadRequest, err)
+	router.DELETE("/api/state/server/delete", func(ctx *gin.Context) {
+		state.Mu.Lock()
+		defer state.Mu.Unlock()
+		retval := app.NatsServer{}
+		serverHost, ok := ctx.GetQuery("hostname")
+		if !ok {
+			ctx.AbortWithError(http.StatusBadRequest, fmt.Errorf("no hostname provided"))
 			return
 		}
 
 		newServers := []app.NatsServer{}
-		for i := range state.Servers {
-			if i != int(uri.Index) {
-				newServers = append(newServers, state.Servers[i])
+		for _, s := range state.Servers {
+			if s.Host != serverHost {
+				newServers = append(newServers, s)
+			} else {
+				retval = s
 			}
 		}
 
 		state.Servers = newServers
+		ctx.JSON(http.StatusOK, &retval)
 	})
 
 	router.GET("api/state/server/monitoring", func(ctx *gin.Context) {
