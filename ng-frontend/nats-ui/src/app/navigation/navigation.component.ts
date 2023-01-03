@@ -39,14 +39,11 @@ export class NavigationComponent implements OnInit {
       this.store.dispatch(new UpdateShowServerMonitoring(!this.showServerMonitoring))
     }
     this.selectedServer = "";
-    console.log(this.selectedServer)
   }
 
   onNgModelChange(event: string) {
     this.store.dispatch(new UpdateShowServerInforamtion(false))
     this.store.dispatch(new UpdateShowServerMonitoring(true))
     this.store.dispatch(new UpdateSelectedServer(event))
-    console.log(event)
   }
-
 }

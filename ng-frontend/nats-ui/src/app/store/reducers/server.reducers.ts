@@ -124,6 +124,28 @@ export function serverReducer(
             }
         }
 
+        case ActionTypes.DeleteServer: {
+            return state
+        }
+
+        case ActionTypes.DeleteServerSuccess: {
+            const newServerArray: Server[] = [];
+            state.servers.forEach(server => {
+                if(server.host != action.payload.host){
+                    newServerArray.push(Object.assign({}, server))
+                }
+            })
+
+            return {
+                ...state,
+                servers: newServerArray
+            }
+        }
+
+        case ActionTypes.DeleteServerFailure: {
+            return state
+        }
+
         default:
             return state
     }
