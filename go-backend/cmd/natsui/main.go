@@ -1,100 +1,65 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 	"time"
 
 	"github.com/GlaDom/nats-ui/internal/app"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/nats-io/nats.go"
 )
 
 func main() {
 	state := app.NewApp()
 
-	go func() {
+	go func(st *app.App) {
 		for {
-			state.Run()
-			time.Sleep(time.Second * 4)
+			for i, s := range st.Servers {
+				newVarz, err := st.UpdateVarz(s)
+				if err != nil {
+					fmt.Println(err)
+				}
+				state.Servers[i].Varz = newVarz
+			}
+			fmt.Println(state.Servers)
+			time.Sleep(time.Second * 5)
 		}
-	}()
+	}(state)
 
 	router := gin.Default()
 	router.Use(cors.New(cors.Config{
 		AllowOrigins: []string{"http://localhost:4200"},
 		AllowMethods: []string{"GET", "POST"},
+		AllowHeaders: []string{"Origin", "Content-Type"},
 	}))
 
-	router.POST("/run", func(c *gin.Context) {
-
-	})
-
-	router.GET("/api/state/server/status", func(ctx *gin.Context) {
+	router.POST("/api/state/server/new", func(ctx *gin.Context) {
 		retval := app.NatsServer{}
-		serverHost, ok := ctx.GetQuery("hostname")
-		if !ok {
+		var err error
+		if err := ctx.BindJSON(&retval); err != nil {
+			ctx.AbortWithError(http.StatusBadRequest, err)
+			return
+		}
+
+		if retval.Host == "" {
 			ctx.AbortWithError(http.StatusBadRequest, fmt.Errorf("no hostname provided"))
 			return
 		}
-		retval.Host = serverHost
 
-		monitoringPort, ok := ctx.GetQuery("monitoringPort")
-		if !ok {
-			ctx.AbortWithError(http.StatusBadRequest, fmt.Errorf("no monitoringPort provided"))
+		if retval.MonitoringPort == 0 {
+			ctx.AbortWithError(http.StatusBadRequest, fmt.Errorf("no monitoringPort provided, %v", retval.MonitoringPort))
 			return
 		}
 
-		httpClient := http.Client{}
-		req, err := http.NewRequest("GET", fmt.Sprintf("http://%s:%v/varz", serverHost, monitoringPort), nil)
+		retval.Varz, err = state.UpdateVarz(retval)
 		if err != nil {
-			err := fmt.Errorf("failed to create request for varz, err:%s", err)
-			ctx.AbortWithError(http.StatusBadRequest, err)
+			ctx.AbortWithError(http.StatusInternalServerError, fmt.Errorf("failed to get varz vor server %s", retval.Host))
 			return
 		}
+		state.Servers = append(state.Servers, retval)
 
-		res, err := httpClient.Do(req)
-		if err != nil {
-			err := fmt.Errorf("failed to get for varz, err:%s", err)
-			ctx.AbortWithError(http.StatusBadRequest, err)
-			return
-		}
-
-		body, err := ioutil.ReadAll(res.Body)
-		if err != nil {
-			err := fmt.Errorf("failed to get for varz, err:%s", err)
-			ctx.AbortWithError(http.StatusBadRequest, err)
-		}
-
-		fmt.Print(string(body))
-		if err := json.Unmarshal(body, &retval.Varz); err != nil {
-			err := fmt.Errorf("failed to unmarshal response for varz, err:%s", err)
-			ctx.AbortWithError(http.StatusInternalServerError, err)
-			return
-		}
-
-		ctx.IndentedJSON(http.StatusOK, retval)
-	})
-
-	router.POST("/api/state/server/new", func(ctx *gin.Context) {
-		server := app.NatsServer{}
-		if err := ctx.BindJSON(&server); err != nil {
-			ctx.AbortWithError(http.StatusBadRequest, err)
-			return
-		}
-
-		nc, err := nats.Connect(fmt.Sprintf("nats://%s:%v", server.Host, server.Port))
-		if err != nil {
-			ctx.AbortWithError(http.StatusInternalServerError, fmt.Errorf("failed to connect to nats-server"))
-			return
-		}
-		defer nc.Close()
-
-		state.Servers = append(state.Servers, server)
-		ctx.JSON(http.StatusAccepted, &server)
+		ctx.JSON(http.StatusOK, &retval)
 	})
 
 	router.DELETE("/api/state/server/delete/:index", func(ctx *gin.Context) {
@@ -114,11 +79,20 @@ func main() {
 		state.Servers = newServers
 	})
 
-	router.POST("/api/state/client/new", func(ctx *gin.Context) {})
-	router.DELETE("/api/state/client/delete/{index}", func(ctx *gin.Context) {})
-
-	router.GET("/state", func(c *gin.Context) {
-
+	router.GET("api/state/server/monitoring", func(ctx *gin.Context) {
+		retval := app.NatsServer{}
+		serverHost, ok := ctx.GetQuery("hostname")
+		if !ok {
+			ctx.AbortWithError(http.StatusBadRequest, fmt.Errorf("no hostname provided"))
+			return
+		}
+		retval.Host = serverHost
+		for _, s := range state.Servers {
+			if s.Host == retval.Host {
+				retval = s
+			}
+		}
+		ctx.JSON(http.StatusOK, &retval)
 	})
 
 	router.Run()
