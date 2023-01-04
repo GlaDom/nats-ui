@@ -6,6 +6,8 @@ export enum ActionTypes {
     //App actions
     UpdateShowServerInforamtion = '[Server] Update Show Server',
     UpdateShowServerMonitoring = '[Server] Update Show Server Monitoring',
+    UpdateShowClientInformation = '[Client] Update Show Client',
+    UpdateShowClientMonitoring = '[Client] Update Show Client Monitoring',
 
     //Server actions
     LoadAllServers = '[Server] Load Servers',
@@ -87,6 +89,15 @@ export class UpdateShowServerMonitoring implements Action {
     constructor(public payload: boolean) {}
 }
 
+export class UpdateShowClientInformation {
+    readonly type = ActionTypes.UpdateShowClientInformation
+    constructor(public payload: boolean) {}
+}
+
+export class UpdateShowClientMonitoring {
+    readonly type = ActionTypes.UpdateShowClientMonitoring
+}
+
 export class DeleteServer implements Action {
     readonly type = ActionTypes.DeleteServer
     constructor(public payload: Server) {}
@@ -114,6 +125,8 @@ export type ServerActions =
     | UpdateSelectedServer
     | UpdateShowServerInforamtion
     | UpdateShowServerMonitoring
+    | UpdateShowClientInformation
+    | UpdateShowClientMonitoring
     | DeleteServer
     | DeleteServerSuccess
     | DeleteServerFailure;

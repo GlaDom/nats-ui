@@ -1,31 +1,40 @@
+import { Client } from 'src/app/models/client.model';
 import { ServerStats } from 'src/app/models/server-monitoring.model';
 import { Server } from '../../models/server'
 import { ActionTypes, AddServerSuccess, ServerActions, UpdateSelectedServer } from '../actions/server.actions';
 
-export interface ServerState {
+export interface AppState {
     servers: Server[];
     selectedServer: Server;
+    serverMonitoring: ServerStats;
+    clients: Client[];
+    selectedClient: Client;
     showServerInformation: boolean;
     showServerMonitoring: boolean;
-    serverMonitoring: ServerStats;
+    showClientInformation: boolean;
+    showClientMonitoring: boolean;
 }
 
-export const initialState: ServerState = {
+export const initialState: AppState = {
     servers: [],
     selectedServer: {},
-    showServerInformation: false,
-    showServerMonitoring: false,
     serverMonitoring: {
         serverMonitoring: null,
         error: null,
         status: 'pending'
-    }
+    },
+    clients: [],
+    selectedClient: {},
+    showServerInformation: false,
+    showServerMonitoring: false,
+    showClientInformation: false,
+    showClientMonitoring: false
 }
 
 export function serverReducer(
     state = initialState,
     action: ServerActions
-): ServerState {
+): AppState {
     // manimpulate state
     switch(action.type) {
         case ActionTypes.LoadAllServers: {
@@ -121,6 +130,27 @@ export function serverReducer(
             return {
                 ...state,
                 showServerMonitoring: action.payload
+            }
+        }
+
+        case ActionTypes.UpdateShowServerInforamtion: {
+            return {
+                ...state,
+                showServerInformation: action.payload
+            }
+        }
+
+        case ActionTypes.UpdateShowServerMonitoring: {
+            return {
+                ...state,
+                showServerMonitoring: action.payload
+            }
+        }
+
+        case ActionTypes.UpdateShowClientInformation: {
+            return {
+                ...state,
+                showClientInformation: action.payload
             }
         }
 

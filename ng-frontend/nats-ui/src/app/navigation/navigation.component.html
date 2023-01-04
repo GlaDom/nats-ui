@@ -6,9 +6,10 @@
                 {{server}}
             </mat-list-option>
         </mat-selection-list>
-        <span>
+        <span (click)="setShowClientInformation()">
             Clients
         </span>
     </mat-sidenav-container>
 </div>
+<router-outlet></router-outlet>
 

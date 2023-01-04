@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { ServerState } from '../store/reducers/server.reducers';
+import { AppState } from '../store/reducers/server.reducers';
 import { Store } from '@ngrx/store' 
 import { Server } from '../models/server'
 import { AddServer } from '../store/actions/server.actions';
@@ -22,7 +22,7 @@ export class AddserverdialogComponent {
 
   constructor(
     public dialogRef: MatDialogRef<AddserverdialogComponent>,
-    private store: Store<ServerState>
+    private store: Store<AppState>
   ) {}
 
   onNoClick(): void {

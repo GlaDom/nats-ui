@@ -5,13 +5,13 @@ import { catchError, from, map, switchMap } from "rxjs";
 import { Server } from "src/app/models/server";
 import { ServerService } from "src/app/services/server.service";
 import { ActionTypes, AddServer, AddServerFailure, AddServerSuccess, DeleteServer, DeleteServerFailure, DeleteServerSuccess, LoadServerMonitoringStats, LoadServerMonitoringStatsFailure, LoadServerMonitoringStatsSuccess } from "../actions/server.actions";
-import { ServerState } from "../reducers/server.reducers";
+import { AppState } from "../reducers/server.reducers";
 
 @Injectable()
 export class ServerEffects {
     constructor(
         private actions$: Actions,
-        private store: Store<ServerState>,
+        private store: Store<AppState>,
         private serverService: ServerService
     ) {}
 

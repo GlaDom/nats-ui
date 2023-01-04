@@ -5,7 +5,13 @@
 .upper-div {
     margin-right: 10px;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.nav-tree {
+    display: flex;
+    align-items: center;
 }
 
 .lower-div {
@@ -23,4 +29,8 @@ button {
     color: white;
     border-radius: 20px;
     border-color: #49454F;
+}
+
+span {
+    font-weight: 600;
 }
