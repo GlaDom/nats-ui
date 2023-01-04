@@ -5,20 +5,23 @@
         <span>Client Name</span>
         <mat-form-field>
             <mat-label>Client Name</mat-label>
-            <input matInput placeholder="Client Name" [(ngModel)]="newClient.name">
+            <input class="client-form-element" matInput placeholder="Client Name" [(ngModel)]="newClient.name">
             <button *ngIf="newClient.name" matSuffix mat-icon-button arial-label="Clear" (click)="newClient.name=''">
                 <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
     </div>
     <div class="serveraddress">
-        <span>Hostname</span>
+        <span>Server</span>
         <mat-form-field>
-            <mat-label>Hostname</mat-label>
-            <input class="server-form-element" matInput placeholder="Hostname" [(ngModel)]="newClient.serverAddress">
+            <mat-label>Server</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let server of servers$" value="server.name">{{server.name}}</mat-option>
+            </mat-select>
+            <!-- <input class="client-form-element" matInput placeholder="Hostname" [(ngModel)]="newClient.serverAddress">
             <button *ngIf="newClient.serverAddress" matSuffix mat-icon-button arial-label="Clear" (click)="newClient.serverAddress=''">
                 <mat-icon>close</mat-icon>
-            </button>
+            </button> -->
         </mat-form-field>
     </div>
     <div class="action-container">

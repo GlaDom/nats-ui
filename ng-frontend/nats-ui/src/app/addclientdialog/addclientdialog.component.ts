@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Client } from '../models/client.model';
+import { Server } from '../models/server';
 
 @Component({
   selector: 'app-addclientdialog',
@@ -8,7 +9,18 @@ import { Client } from '../models/client.model';
   styleUrls: ['./addclientdialog.component.css']
 })
 export class AddclientdialogComponent {
-  newClient: Client;
+  newClient: Client = {
+    name: "",
+    serverAddress: ""
+  };
+  servers$: Server[] = [
+    {
+      name: "test-server",
+    },
+    {
+      name: "test-server2",
+    }
+  ];
 
   constructor(
     private dialogRef: MatDialogRef<AddclientdialogComponent>,

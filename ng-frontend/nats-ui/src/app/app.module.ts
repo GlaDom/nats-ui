@@ -17,6 +17,7 @@ import {MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/mater
 import {MatIconModule} from '@angular/material/icon'
 import {MatInputModule} from '@angular/material/input';
 import {MatListModule} from '@angular/material/list';
+import {MatSelectModule} from '@angular/material/select'
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -55,6 +56,7 @@ import { AddclientdialogComponent } from './addclientdialog/addclientdialog.comp
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatSelectModule,
     MatSidenavModule,
     MatTableModule,
     MatToolbarModule,
@@ -66,7 +68,7 @@ import { AddclientdialogComponent } from './addclientdialog/addclientdialog.comp
     }),
     EffectsModule.forRoot([ServerEffects])
   ],
-  entryComponents: [AddserverdialogComponent],
+  entryComponents: [AddserverdialogComponent, AddclientdialogComponent],
   providers: [
     {provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {appearance: 'outline'}},
     ServerService
