@@ -1,0 +1,68 @@
+.client-dialog {
+    width: 495px;
+    height: 350px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-rows: 80.5px 2px 85.5px 85.5px 85.5px 85.5px 85.5px;
+    align-items: center;
+}
+
+.client-name {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 25% 210px;
+    grid-row: 100%;
+    justify-content: center;
+    align-items: center;
+    float: right;
+}
+
+.serveraddress {
+    display: grid;
+    grid-template-columns: 25% 210px;
+    grid-row: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.action-container {
+    display: grid;
+    grid-template-columns: 100px 100px;
+    grid-template-rows: 100%;
+    justify-content: center;
+}
+
+.save-button {
+    height: 40px;
+    width: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: bold;
+    background-color: #49454F;
+    color: white;
+    border-radius: 20px;
+    border-color: #49454F;
+}
+
+.cancel-button {
+    height: 40px;
+    width: 80px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 20px;
+    background-color: white;
+    color: #79747E;
+}
+
+mat-divider {
+    margin: 10px;
+}
+
+span {
+    padding-right: 10px;
+    text-align: right;
+}

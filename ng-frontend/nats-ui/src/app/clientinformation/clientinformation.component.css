@@ -1,12 +1,14 @@
-.server-table {
-    width: 100%;
-}
-
 .upper-div {
     margin-right: 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.mdc-icon-button {
+    height: 40px;
+    width: 130px;
+    font-size: 10pt;
 }
 
 .nav-tree {
@@ -18,9 +20,15 @@
     margin: 10px;
 }
 
+.mat-column-name {
+    width: 15%;
+}
+
+.mat-column-serveraddress {
+    width: 70%;
+}
+
 button {
-    height: 40px;
-    width: 130px;
     display: flex;
     justify-content: space-around;
     align-items: center;

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerMonitoring } from '../models/server-monitoring.model';
 import { LoadServerMonitoringStats } from '../store/actions/server.actions';
-import { ServerState } from '../store/reducers/server.reducers';
+import { AppState } from '../store/reducers/server.reducers';
 import { select, Store } from '@ngrx/store'
 import { Observable } from 'rxjs';
 import { getSelectedServer, getServerMonitoringStats } from '../store';
@@ -17,7 +17,7 @@ export class ServerMonitoringComponent implements OnInit {
   selectedServer$: Server;
 
   constructor(
-    private store: Store<ServerState>
+    private store: Store<AppState>
   ) {
     this.serverStats = {
       id: 0,

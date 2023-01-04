@@ -1,0 +1,36 @@
+<div class="upper-div">
+    <div class="nav-tree">
+        <span>Nats-WebUI</span>
+        <mat-icon>keyboard_arrow_right</mat-icon>
+        <span>Clients</span>
+    </div>
+    <button matsuffix mat-icon-button (click)="openAddClientDialog()">
+      <mat-icon>add</mat-icon>
+      <span>Add Client</span>
+    </button>
+</div>
+<div class="lower-div">
+    <div class="client-table">
+        <table mat-table [dataSource]="clients$">
+            <ng-container class="mat-column" matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>Name</th>
+                <td mat-cell *matCellDef="let client"> {{client.name}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="serveraddress">
+                <th mat-header-cell *matHeaderCellDef> Server Address </th>
+                <td mat-cell *matCellDef="let client"> {{client.serverAddress}}</td>
+            </ng-container>
+    
+            <ng-container matColumnDef="operations">
+                <th mat-header-cell *matHeaderCellDef> Operations </th>
+                <td mat-cell *matCellDef="let client">
+                    <mat-icon (click)="deleteClient(client)">delete</mat-icon>
+                </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
+        </table>
+    </div>
+</div>

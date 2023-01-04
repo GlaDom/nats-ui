@@ -1,0 +1,35 @@
+<div class="client-dialog">
+    <h2 style="text-align: center;">Configure new NATS Client</h2>
+    <mat-divider></mat-divider>
+    <div class="client-name">
+        <span>Client Name</span>
+        <mat-form-field>
+            <mat-label>Client Name</mat-label>
+            <input class="client-form-element" matInput placeholder="Client Name" [(ngModel)]="newClient.name">
+            <button *ngIf="newClient.name" matSuffix mat-icon-button arial-label="Clear" (click)="newClient.name=''">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+    </div>
+    <div class="serveraddress">
+        <span>Server</span>
+        <mat-form-field>
+            <mat-label>Server</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let server of servers$" value="server.name">{{server.name}}</mat-option>
+            </mat-select>
+            <!-- <input class="client-form-element" matInput placeholder="Hostname" [(ngModel)]="newClient.serverAddress">
+            <button *ngIf="newClient.serverAddress" matSuffix mat-icon-button arial-label="Clear" (click)="newClient.serverAddress=''">
+                <mat-icon>close</mat-icon>
+            </button> -->
+        </mat-form-field>
+    </div>
+    <div class="action-container">
+        <button class="cancel-button" (click)="onNoClick()">
+            Cancel
+        </button>
+        <button class="save-button" (click)="addClient()">
+            Save
+        </button>
+    </div>
+</div>

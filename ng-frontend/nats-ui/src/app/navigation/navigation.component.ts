@@ -1,10 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
-import { Server } from '../models/server';
 import { getAllServers } from '../store';
-import { LoadAllServers, UpdateSelectedServer, UpdateShowServerInforamtion, UpdateShowServerMonitoring } from '../store/actions/server.actions';
-import { ServerState } from '../store/reducers/server.reducers';
+import { LoadAllServers, UpdateSelectedServer, UpdateShowClientInformation, UpdateShowServerInforamtion, UpdateShowServerMonitoring } from '../store/actions/server.actions';
+import { AppState } from '../store/reducers/server.reducers';
 
 @Component({
   selector: 'app-navigation',
@@ -18,7 +16,7 @@ export class NavigationComponent implements OnInit {
   selectedServer: string = "";
 
   constructor(
-    private store: Store<ServerState>
+    private store: Store<AppState>
   ) { }
 
   ngOnInit(): void {
@@ -38,7 +36,20 @@ export class NavigationComponent implements OnInit {
     if (this.showServerMonitoring) {
       this.store.dispatch(new UpdateShowServerMonitoring(!this.showServerMonitoring))
     }
+    if (this.setShowClientInformation) {
+      this.store.dispatch(new UpdateShowClientInformation(!this.setShowClientInformation))
+    }
     this.selectedServer = "";
+  }
+
+  setShowClientInformation():void {
+    if(this.showServerInformation) {
+      this.store.dispatch(new UpdateShowServerInforamtion(false))
+    }
+    if(this.showServerMonitoring) {
+      this.store.dispatch(new UpdateShowServerMonitoring(false))
+    }
+    this.store.dispatch(new UpdateShowClientInformation(true))
   }
 
   onNgModelChange(event: string) {

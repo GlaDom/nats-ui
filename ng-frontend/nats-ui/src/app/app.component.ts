@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { from, Observable } from 'rxjs';
-import { getShowServerInformation, getShowServerMonitoring } from './store';
+import { getShowClientInformation, getShowServerInformation, getShowServerMonitoring } from './store';
 import { LoadShowServerInformation } from './store/actions/server.actions';
-import { ServerState } from './store/reducers/server.reducers';
+import { AppState } from './store/reducers/server.reducers';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +14,11 @@ export class AppComponent implements OnInit {
   title = 'nats-ui';
   showServerInformation$: boolean;
   showServerMonitoring$: boolean;
+  showClientInformation$: boolean;
+  showClientMonitoring$: boolean;
 
   constructor(
-    private store: Store<ServerState>
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +28,9 @@ export class AppComponent implements OnInit {
     })
     this.store.select(getShowServerMonitoring).subscribe(state => {
       this.showServerMonitoring$ = state
+    })
+    this.store.select(getShowClientInformation).subscribe(state => {
+      this.showClientInformation$ = state
     })
   }
 }

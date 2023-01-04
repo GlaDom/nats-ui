@@ -3,6 +3,13 @@ import { ServerMonitoring } from 'src/app/models/server-monitoring.model'
 import { Server } from '../../models/server'
 
 export enum ActionTypes {
+    //App actions
+    UpdateShowServerInforamtion = '[Server] Update Show Server',
+    UpdateShowServerMonitoring = '[Server] Update Show Server Monitoring',
+    UpdateShowClientInformation = '[Client] Update Show Client',
+    UpdateShowClientMonitoring = '[Client] Update Show Client Monitoring',
+
+    //Server actions
     LoadAllServers = '[Server] Load Servers',
     LoadAllServerNames = '[Server] Load Server Names',
 
@@ -18,12 +25,12 @@ export enum ActionTypes {
     AddServerFailure = '[Server] Add Server Failure',
     
     UpdateSelectedServer = '[Server] Update Selected Server',
-    UpdateShowServerInforamtion = '[Server] Update Show Server',
-    UpdateShowServerMonitoring = '[Server] Update Show Server Monitoring',
 
     DeleteServer = '[Server] Delete Server',
     DeleteServerSuccess = '[Server] Delete Server Success',
     DeleteServerFailure = '[Server] Delete Server Failure'
+
+    //Client actions
 }
 
 export class LoadAllServers implements Action {
@@ -82,6 +89,15 @@ export class UpdateShowServerMonitoring implements Action {
     constructor(public payload: boolean) {}
 }
 
+export class UpdateShowClientInformation {
+    readonly type = ActionTypes.UpdateShowClientInformation
+    constructor(public payload: boolean) {}
+}
+
+export class UpdateShowClientMonitoring {
+    readonly type = ActionTypes.UpdateShowClientMonitoring
+}
+
 export class DeleteServer implements Action {
     readonly type = ActionTypes.DeleteServer
     constructor(public payload: Server) {}
@@ -109,6 +125,8 @@ export type ServerActions =
     | UpdateSelectedServer
     | UpdateShowServerInforamtion
     | UpdateShowServerMonitoring
+    | UpdateShowClientInformation
+    | UpdateShowClientMonitoring
     | DeleteServer
     | DeleteServerSuccess
     | DeleteServerFailure;
