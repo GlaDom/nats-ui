@@ -27,6 +27,8 @@ import { ServerMonitoringComponent } from './server-monitoring/server-monitoring
 import { ServerService } from './services/server.service';
 import { EffectsModule } from '@ngrx/effects';
 import { ServerEffects } from './store/effects/server.effects';
+import { ClientinformationComponent } from './clientinformation/clientinformation.component';
+import { AddclientdialogComponent } from './addclientdialog/addclientdialog.component';
 
 
 @NgModule({
@@ -36,6 +38,8 @@ import { ServerEffects } from './store/effects/server.effects';
     ServerinformationComponent,
     AddserverdialogComponent,
     ServerMonitoringComponent,
+    ClientinformationComponent,
+    AddclientdialogComponent,
   ],
   imports: [
     AppRoutingModule,

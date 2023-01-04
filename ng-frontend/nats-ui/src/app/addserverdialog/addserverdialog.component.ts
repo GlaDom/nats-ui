@@ -1,10 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { ServerState } from '../store/reducers/server.reducers';
 import { Store } from '@ngrx/store' 
 import { Server } from '../models/server'
 import { AddServer } from '../store/actions/server.actions';
-import { ServerinformationComponent } from '../serverinformation/serverinformation.component';
 
 @Component({
   selector: 'app-addserverdialog',

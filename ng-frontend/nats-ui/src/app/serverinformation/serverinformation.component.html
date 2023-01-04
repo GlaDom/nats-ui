@@ -6,7 +6,7 @@
 </div>
 <div class="lower-div">
     <div class="server-table">
-        <table mat-table [dataSource]="servers$">
+        <table mat-table [dataSource]="servers$" >
             <ng-container class="mat-column" matColumnDef="name">
                 <th mat-header-cell *matHeaderCellDef> Name </th>
                 <td mat-cell *matCellDef="let server"> {{server.name}}</td>

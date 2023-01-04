@@ -2,10 +2,6 @@
     width: 100%;
 }
 
-.mat-column {
-    border-color: red;
-}
-
 .upper-div {
     margin-right: 10px;
     display: flex;
