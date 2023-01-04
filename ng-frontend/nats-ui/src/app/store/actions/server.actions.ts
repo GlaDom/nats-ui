@@ -3,6 +3,11 @@ import { ServerMonitoring } from 'src/app/models/server-monitoring.model'
 import { Server } from '../../models/server'
 
 export enum ActionTypes {
+    //App actions
+    UpdateShowServerInforamtion = '[Server] Update Show Server',
+    UpdateShowServerMonitoring = '[Server] Update Show Server Monitoring',
+
+    //Server actions
     LoadAllServers = '[Server] Load Servers',
     LoadAllServerNames = '[Server] Load Server Names',
 
@@ -18,12 +23,12 @@ export enum ActionTypes {
     AddServerFailure = '[Server] Add Server Failure',
     
     UpdateSelectedServer = '[Server] Update Selected Server',
-    UpdateShowServerInforamtion = '[Server] Update Show Server',
-    UpdateShowServerMonitoring = '[Server] Update Show Server Monitoring',
 
     DeleteServer = '[Server] Delete Server',
     DeleteServerSuccess = '[Server] Delete Server Success',
     DeleteServerFailure = '[Server] Delete Server Failure'
+
+    //Client actions
 }
 
 export class LoadAllServers implements Action {
