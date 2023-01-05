@@ -9,6 +9,11 @@
         <span (click)="setShowClientInformation()">
             Clients
         </span>
+        <mat-selection-list [multiple]="false" [(ngModel)]="selectedClient" (ngModelChange)="onNgModelChange($event)">
+            <mat-list-option *ngFor="let client of clients" [value]="client">
+                {{client}}
+            </mat-list-option>
+        </mat-selection-list>
     </mat-sidenav-container>
 </div>
 <router-outlet></router-outlet>

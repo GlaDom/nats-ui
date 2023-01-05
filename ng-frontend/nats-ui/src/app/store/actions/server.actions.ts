@@ -1,9 +1,12 @@
 import { Action } from '@ngrx/store'
+import { Client } from 'src/app/models/client.model'
 import { ServerMonitoring } from 'src/app/models/server-monitoring.model'
 import { Server } from '../../models/server'
 
 export enum ActionTypes {
     //App actions
+    LoadShowServerInformation = '[Server] Load Show Server',
+
     UpdateShowServerInforamtion = '[Server] Update Show Server',
     UpdateShowServerMonitoring = '[Server] Update Show Server Monitoring',
     UpdateShowClientInformation = '[Client] Update Show Client',
@@ -14,7 +17,6 @@ export enum ActionTypes {
     LoadAllServerNames = '[Server] Load Server Names',
 
     LoadSingleServer = '[Server] Load Single Server',
-    LoadShowServerInformation = '[Server] Load Show Server',
 
     LoadServerMonitoringStats = '[Server] Load Server Monitoring',
     LoadServerMonitoringStatsSuccess = '[Server] Load Server Monitoring Stats Success',
@@ -28,11 +30,42 @@ export enum ActionTypes {
 
     DeleteServer = '[Server] Delete Server',
     DeleteServerSuccess = '[Server] Delete Server Success',
-    DeleteServerFailure = '[Server] Delete Server Failure'
+    DeleteServerFailure = '[Server] Delete Server Failure',
 
     //Client actions
+    LoadAllClients = '[Client] Load Clients',
+    LoadSingleClient = '[Client] Load Single Client',
+
+    AddClient = '[Client] Add Client',
+
+    DeleteClient = '[Client] Delete Client'
 }
 
+//Global App classes
+export class LoadShowServerInformation implements Action {
+    readonly type = ActionTypes.LoadShowServerInformation
+}
+
+export class UpdateShowServerInforamtion implements Action {
+    readonly type = ActionTypes.UpdateShowServerInforamtion
+    constructor(public payload: boolean) {}
+}
+
+export class UpdateShowServerMonitoring implements Action {
+    readonly type = ActionTypes.UpdateShowServerMonitoring
+    constructor(public payload: boolean) {}
+}
+
+export class UpdateShowClientInformation {
+    readonly type = ActionTypes.UpdateShowClientInformation
+    constructor(public payload: boolean) {}
+}
+
+export class UpdateShowClientMonitoring {
+    readonly type = ActionTypes.UpdateShowClientMonitoring
+}
+
+//Server classes
 export class LoadAllServers implements Action {
     readonly type = ActionTypes.LoadAllServers
 }
@@ -70,32 +103,9 @@ export class AddServerFailure implements Action {
     readonly type = ActionTypes.AddServerFailure 
 }
 
-export class LoadShowServerInformation implements Action {
-    readonly type = ActionTypes.LoadShowServerInformation
-}
-
 export class UpdateSelectedServer implements Action {
     readonly type = ActionTypes.UpdateSelectedServer
     constructor(public payload: string) {}
-}
-
-export class UpdateShowServerInforamtion implements Action {
-    readonly type = ActionTypes.UpdateShowServerInforamtion
-    constructor(public payload: boolean) {}
-}
-
-export class UpdateShowServerMonitoring implements Action {
-    readonly type = ActionTypes.UpdateShowServerMonitoring
-    constructor(public payload: boolean) {}
-}
-
-export class UpdateShowClientInformation {
-    readonly type = ActionTypes.UpdateShowClientInformation
-    constructor(public payload: boolean) {}
-}
-
-export class UpdateShowClientMonitoring {
-    readonly type = ActionTypes.UpdateShowClientMonitoring
 }
 
 export class DeleteServer implements Action {
@@ -112,14 +122,37 @@ export class DeleteServerFailure implements Action {
     readonly type = ActionTypes.DeleteServerFailure
 }
 
+//Client classes
+export class LoadAllClients implements Action {
+    readonly type = ActionTypes.LoadAllClients
+}
+
+export class LoadSingleClient implements Action {
+    readonly type = ActionTypes.LoadSingleClient
+    constructor(public payload: string) {}
+}
+
+export class AddClient implements Action {
+    readonly type = ActionTypes.AddClient
+    constructor(public payload: Client) {}
+}
+
+export class DeleteClient implements Action {
+    readonly type = ActionTypes.DeleteClient
+    constructor(public payload: string) {}
+}
+
 export type ServerActions = 
     | LoadAllServers
-    | LoadSingleServer 
+    | LoadAllClients
+    | LoadSingleServer
+    | LoadSingleClient 
     | LoadShowServerInformation
     | LoadServerMonitoringStats
     | LoadServerMonitoringStatsSuccess
     | LoadServerMonitoringStatsFailure
     | AddServer
+    | AddClient
     | AddServerSuccess
     | AddServerFailure
     | UpdateSelectedServer
@@ -129,4 +162,5 @@ export type ServerActions =
     | UpdateShowClientMonitoring
     | DeleteServer
     | DeleteServerSuccess
-    | DeleteServerFailure;
+    | DeleteServerFailure
+    | DeleteClient;

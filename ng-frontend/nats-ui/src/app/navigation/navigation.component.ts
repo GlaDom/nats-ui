@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { getAllServers } from '../store';
-import { LoadAllServers, UpdateSelectedServer, UpdateShowClientInformation, UpdateShowServerInforamtion, UpdateShowServerMonitoring } from '../store/actions/server.actions';
+import { getAllClients, getAllServers } from '../store';
+import { LoadAllClients, LoadAllServers, UpdateSelectedServer, UpdateShowClientInformation, UpdateShowServerInforamtion, UpdateShowServerMonitoring } from '../store/actions/server.actions';
 import { AppState } from '../store/reducers/server.reducers';
 
 @Component({
@@ -14,6 +14,8 @@ export class NavigationComponent implements OnInit {
   @Input() showServerMonitoring: boolean;
   servers: string[] = [];
   selectedServer: string = "";
+  clients: string[] = [];
+  selectedClient: string = "";
 
   constructor(
     private store: Store<AppState>
@@ -21,10 +23,17 @@ export class NavigationComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(new LoadAllServers)
+    this.store.dispatch(new LoadAllClients)
     this.store.pipe(select(getAllServers)).subscribe(state => {
       this.servers = [];
       for (let i = 0; i <  state.length; i++)  {
         this.servers.push(state[i].name)         
+      }
+    })
+    this.store.pipe(select(getAllClients)).subscribe(state => {
+      this.clients = [];
+      for (let i = 0; i <  state.length; i++)  {
+        this.clients.push(state[i].name)         
       }
     })
   }

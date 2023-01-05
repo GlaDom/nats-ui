@@ -15,13 +15,9 @@
         <span>Server</span>
         <mat-form-field>
             <mat-label>Server</mat-label>
-            <mat-select>
-                <mat-option *ngFor="let server of servers$" value="server.name">{{server.name}}</mat-option>
+            <mat-select (selectionChange)="changeSelectedServer($event.value)">
+                <mat-option *ngFor="let server of servers$" [value]="server.name">{{server.name}}</mat-option>
             </mat-select>
-            <!-- <input class="client-form-element" matInput placeholder="Hostname" [(ngModel)]="newClient.serverAddress">
-            <button *ngIf="newClient.serverAddress" matSuffix mat-icon-button arial-label="Clear" (click)="newClient.serverAddress=''">
-                <mat-icon>close</mat-icon>
-            </button> -->
         </mat-form-field>
     </div>
     <div class="action-container">

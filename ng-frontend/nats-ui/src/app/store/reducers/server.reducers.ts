@@ -176,6 +176,17 @@ export function serverReducer(
             return state
         }
 
+        case ActionTypes.LoadAllClients: {
+            return state
+        }
+
+        case ActionTypes.AddClient: {
+            return {
+                ...state,
+                clients: [...state.clients, action.payload]
+            }
+        }
+
         default:
             return state
     }

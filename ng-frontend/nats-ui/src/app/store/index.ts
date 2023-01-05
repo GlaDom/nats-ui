@@ -33,3 +33,8 @@ export const getServerMonitoringStats = createSelector(
     getServerState,
     (state: AppState) => state.serverMonitoring.serverMonitoring
 )
+
+export const getAllClients = createSelector(
+    getServerState,
+    (state: AppState) => state.clients
+)
