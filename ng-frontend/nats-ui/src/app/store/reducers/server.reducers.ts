@@ -193,6 +193,15 @@ export function serverReducer(
             }
         }
 
+        case ActionTypes.UpdateSelectedClient: {
+            const index = state.clients.findIndex(client => client.name == action.payload)
+            const newSelectedClient = state.clients[index]
+            return {
+                ...state,
+                selectedClient: newSelectedClient
+            }
+        }
+
         default:
             return state
     }

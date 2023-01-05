@@ -38,6 +38,8 @@ export enum ActionTypes {
 
     AddClient = '[Client] Add Client',
 
+    UpdateSelectedClient = '[Client] Update Selected Client',
+
     DeleteClient = '[Client] Delete Client'
 }
 
@@ -138,6 +140,11 @@ export class AddClient implements Action {
     constructor(public payload: Client) {}
 }
 
+export class UpdateSelectedClient implements Action {
+    readonly type = ActionTypes.UpdateSelectedClient
+    constructor(public payload: string) {}
+}
+
 export class DeleteClient implements Action {
     readonly type = ActionTypes.DeleteClient
     constructor(public payload: string) {}
@@ -157,6 +164,7 @@ export type ServerActions =
     | AddServerSuccess
     | AddServerFailure
     | UpdateSelectedServer
+    | UpdateSelectedClient
     | UpdateShowServerInforamtion
     | UpdateShowServerMonitoring
     | UpdateShowClientInformation

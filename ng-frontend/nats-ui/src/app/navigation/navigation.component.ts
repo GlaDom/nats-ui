@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { getAllClients, getAllServers } from '../store';
-import { LoadAllClients, LoadAllServers, UpdateSelectedServer, UpdateShowClientInformation, UpdateShowClientMonitoring, UpdateShowServerInforamtion, UpdateShowServerMonitoring } from '../store/actions/server.actions';
+import { LoadAllClients, LoadAllServers, UpdateSelectedClient, UpdateSelectedServer, UpdateShowClientInformation, UpdateShowClientMonitoring, UpdateShowServerInforamtion, UpdateShowServerMonitoring } from '../store/actions/server.actions';
 import { AppState } from '../store/reducers/server.reducers';
 
 @Component({
@@ -70,6 +70,7 @@ export class NavigationComponent implements OnInit {
       this.store.dispatch(new UpdateShowClientMonitoring(false))
     }
     this.store.dispatch(new UpdateShowClientInformation(true))
+    this.selectedClient = "";
   }
 
   onNgServerModelChange(event: string) {
@@ -85,5 +86,6 @@ export class NavigationComponent implements OnInit {
     this.store.dispatch(new UpdateShowServerMonitoring(false))
     this.store.dispatch(new UpdateShowClientInformation(false))
     this.store.dispatch(new UpdateShowClientMonitoring(true))
+    this.store.dispatch(new UpdateSelectedClient(event))
   }
 }
