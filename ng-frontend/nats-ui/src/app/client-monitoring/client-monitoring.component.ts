@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-client-monitoring',
@@ -8,6 +9,16 @@ import { Component } from '@angular/core';
 export class ClientMonitoringComponent {
   messages$: any;
   displayedColumns: string[] = ["timestamp", "type", "subject", "message"]
+  filters = this.formBuilder.group({
+    info: true,
+    ping: true,
+    pong: true,
+    ok: true,
+    err: true,
+    msg: true
+  })
 
-  constructor() {}
+  constructor(
+    private formBuilder: FormBuilder
+  ) {}
 }

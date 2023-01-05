@@ -7,13 +7,13 @@
 .left-container {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 56px 84px 217px 200px 120px;
+    grid-template-rows: 56px 84px 10% 200px 120px;
 }
 
 .right-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    margin-left: 10px;
 }
 
 .nav-tree {
@@ -23,4 +23,36 @@
     margin-top: 20px;
     margin-left: 10px;
     font-weight: 600;
+}
+
+.client-information {
+    margin-top: 10px;
+}
+
+.client-name {
+    width: 25%;
+    margin-right: 20px;
+}
+
+.server-list {
+    width: 60%;
+    margin-right: 10px;
+}
+
+.filters {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+span {
+    font-weight: 600;
+}
+
+p {
+    margin-right: 10px;
+}
+
+button {
+    height: 56px;
 }

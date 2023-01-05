@@ -7,6 +7,30 @@
             <mat-icon>keyboard_arrow_right</mat-icon>
             <span>test-client</span>
         </div>
+        <div class="client-information">
+            <mat-form-field class="client-name">
+                <mat-label>Client Name</mat-label>
+                <input matInput type="text">
+            </mat-form-field>
+            <mat-form-field class="server-list">
+                <mat-label>Servers</mat-label>
+                <mat-select>
+                    <mat-option>test-server</mat-option>
+                    <mat-option>test-server2</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button  mat-stroked-button extended="">
+                <span>Subscribe</span>
+            </button>
+        </div>
+        <div class="filters" [formGroup]="filters">
+            <p><mat-checkbox formControlName="info">Info</mat-checkbox></p>
+            <p><mat-checkbox formControlName="info">Ping</mat-checkbox></p>
+            <p><mat-checkbox formControlName="info">Pong</mat-checkbox></p>
+            <p><mat-checkbox formControlName="info">Ok</mat-checkbox></p>
+            <p><mat-checkbox formControlName="info">Err</mat-checkbox></p>
+            <p><mat-checkbox formControlName="info">Msg</mat-checkbox></p>
+        </div>
         <div class="client-table">
             <table mat-table [dataSource]="messages$">
                 <ng-container class="mat-column" matColumnDef="timestamp">
@@ -36,6 +60,6 @@
     </div>
     <mat-divider vertical="true"></mat-divider>
     <div class="right-container">
-        <span>SUBJECT TREE</span> 
+        <span>Server Subject Hierarchy</span> 
     </div>
 </div>
