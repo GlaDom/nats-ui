@@ -1,7 +1,11 @@
   <div class="main-body">
     <div class="side-nav">
       <h2>Nats-WebUI</h2>
-      <app-navigation [showServerInformation]="showServerInformation$" [showServerMonitoring]="showServerMonitoring$"></app-navigation>
+      <app-navigation 
+      [showServerInformation]="showServerInformation$" 
+      [showServerMonitoring]="showServerMonitoring$" 
+      [showClientMonitoring]="showClientMonitoring$"
+      [showClientInformation]="showClientInformation$"></app-navigation>
     </div>
     <mat-divider vertical="true"></mat-divider>
     <div class="right-div">

@@ -39,7 +39,6 @@ export class AddclientdialogComponent {
   changeSelectedServer(serverName): void {
     this.selectedServer = serverName
     for(let i = 0; i< this.servers$.length;i++){
-      console.log(this.servers$[i])
       if(this.servers$[i].name == this.selectedServer) {
         this.newClient.serverAddress = this.servers$[i].host.concat(":", this.servers$[i].port.toString())
       }

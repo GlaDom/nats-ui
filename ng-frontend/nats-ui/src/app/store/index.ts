@@ -24,6 +24,11 @@ export const getShowClientInformation = createSelector(
     (state: AppState) => state.showClientInformation
 )
 
+export const getShowClientMonitoring = createSelector(
+    getServerState,
+    (state: AppState) => state.showClientMonitoring
+)
+
 export const getSelectedServer = createSelector(
     getServerState,
     (state: AppState) => state.selectedServer

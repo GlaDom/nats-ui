@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { from, Observable } from 'rxjs';
-import { getShowClientInformation, getShowServerInformation, getShowServerMonitoring } from './store';
+import { getShowClientInformation, getShowClientMonitoring, getShowServerInformation, getShowServerMonitoring } from './store';
 import { LoadShowServerInformation } from './store/actions/server.actions';
 import { AppState } from './store/reducers/server.reducers';
 
@@ -22,7 +22,6 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.dispatch(new LoadShowServerInformation)
     this.store.select(getShowServerInformation).subscribe(state => {
       this.showServerInformation$ = state
     })
@@ -31,6 +30,9 @@ export class AppComponent implements OnInit {
     })
     this.store.select(getShowClientInformation).subscribe(state => {
       this.showClientInformation$ = state
+    })
+    this.store.select(getShowClientMonitoring).subscribe(state => {
+      this.showClientMonitoring$ = state
     })
   }
 }

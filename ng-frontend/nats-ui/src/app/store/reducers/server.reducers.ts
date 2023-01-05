@@ -57,7 +57,6 @@ export function serverReducer(
         }
 
         case ActionTypes.LoadServerMonitoringStatsSuccess: {
-            console.log(action.payload)
             const newServerMonitoring = Object.assign({}, state.serverMonitoring);
             newServerMonitoring.serverMonitoring = action.payload
             newServerMonitoring.status = 'success'
@@ -151,6 +150,13 @@ export function serverReducer(
             return {
                 ...state,
                 showClientInformation: action.payload
+            }
+        }
+
+        case ActionTypes.UpdateShowClientMonitoring: {
+            return {
+                ...state,
+                showClientMonitoring: action.payload
             }
         }
 

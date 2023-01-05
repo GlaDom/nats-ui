@@ -63,6 +63,7 @@ export class UpdateShowClientInformation {
 
 export class UpdateShowClientMonitoring {
     readonly type = ActionTypes.UpdateShowClientMonitoring
+    constructor(public payload: boolean) {}
 }
 
 //Server classes
