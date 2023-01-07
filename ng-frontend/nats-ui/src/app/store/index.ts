@@ -24,6 +24,11 @@ export const getShowClientInformation = createSelector(
     (state: AppState) => state.showClientInformation
 )
 
+export const getShowClientMonitoring = createSelector(
+    getServerState,
+    (state: AppState) => state.showClientMonitoring
+)
+
 export const getSelectedServer = createSelector(
     getServerState,
     (state: AppState) => state.selectedServer
@@ -32,4 +37,14 @@ export const getSelectedServer = createSelector(
 export const getServerMonitoringStats = createSelector(
     getServerState,
     (state: AppState) => state.serverMonitoring.serverMonitoring
+)
+
+export const getAllClients = createSelector(
+    getServerState,
+    (state: AppState) => state.clients
+)
+
+export const getSelectedClient = createSelector(
+    getServerState,
+    (state: AppState) => state.selectedClient
 )

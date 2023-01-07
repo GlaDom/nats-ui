@@ -33,7 +33,6 @@ export class ServerMonitoringComponent implements OnInit {
   ngOnInit(): void {
     this.store.pipe(select(getSelectedServer)).subscribe(state => 
       this.selectedServer$ = state)
-    console.log(this.selectedServer$)
     this.store.dispatch(new LoadServerMonitoringStats(this.selectedServer$))
     this.store.pipe(select(getServerMonitoringStats)).subscribe(state => 
       this.serverStats = state)

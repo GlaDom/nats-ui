@@ -1,6 +1,6 @@
 .global-container {
     display: grid;
-    grid-template-columns: auto 256px;
+    grid-template-columns: auto 2px 300px;
     grid-template-rows: 100%;
 }
 
@@ -12,8 +12,8 @@
 
 .right-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    margin-left: 10px;
 }
 
 .nav-tree {
@@ -104,4 +104,5 @@ mat-card {
 
 span {
     margin-left: 10px;
+    font-weight: 600;
 }

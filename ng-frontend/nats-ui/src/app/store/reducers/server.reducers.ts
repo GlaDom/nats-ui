@@ -57,7 +57,6 @@ export function serverReducer(
         }
 
         case ActionTypes.LoadServerMonitoringStatsSuccess: {
-            console.log(action.payload)
             const newServerMonitoring = Object.assign({}, state.serverMonitoring);
             newServerMonitoring.serverMonitoring = action.payload
             newServerMonitoring.status = 'success'
@@ -154,6 +153,13 @@ export function serverReducer(
             }
         }
 
+        case ActionTypes.UpdateShowClientMonitoring: {
+            return {
+                ...state,
+                showClientMonitoring: action.payload
+            }
+        }
+
         case ActionTypes.DeleteServer: {
             return state
         }
@@ -174,6 +180,26 @@ export function serverReducer(
 
         case ActionTypes.DeleteServerFailure: {
             return state
+        }
+
+        case ActionTypes.LoadAllClients: {
+            return state
+        }
+
+        case ActionTypes.AddClient: {
+            return {
+                ...state,
+                clients: [...state.clients, action.payload]
+            }
+        }
+
+        case ActionTypes.UpdateSelectedClient: {
+            const index = state.clients.findIndex(client => client.name == action.payload)
+            const newSelectedClient = state.clients[index]
+            return {
+                ...state,
+                selectedClient: newSelectedClient
+            }
         }
 
         default:

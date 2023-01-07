@@ -1,7 +1,7 @@
 <div>
     <mat-sidenav-container class="sidenav">
         <span (click)="setShowServerInformation()">Servers</span>
-        <mat-selection-list [multiple]="false" [(ngModel)]="selectedServer" (ngModelChange)="onNgModelChange($event)">
+        <mat-selection-list [multiple]="false" [(ngModel)]="selectedServer" (ngModelChange)="onNgServerModelChange($event)">
             <mat-list-option *ngFor="let server of servers" [value]="server">
                 {{server}}
             </mat-list-option>
@@ -9,6 +9,11 @@
         <span (click)="setShowClientInformation()">
             Clients
         </span>
+        <mat-selection-list [multiple]="false" [(ngModel)]="selectedClient" (ngModelChange)="onNgClientModelChange($event)">
+            <mat-list-option *ngFor="let client of clients" [value]="client">
+                {{client}}
+            </mat-list-option>
+        </mat-selection-list>
     </mat-sidenav-container>
 </div>
 <router-outlet></router-outlet>

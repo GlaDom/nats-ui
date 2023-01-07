@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store'
 import { HttpClientModule } from '@angular/common/http';
 
@@ -9,18 +10,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { ServerinformationComponent } from './serverinformation/serverinformation.component';
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {MatDialogModule} from '@angular/material/dialog'
-import {MatDividerModule} from '@angular/material/divider';
-import {MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon'
-import {MatInputModule} from '@angular/material/input';
-import {MatListModule} from '@angular/material/list';
-import {MatSelectModule} from '@angular/material/select'
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatTableModule} from '@angular/material/table';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatDividerModule } from '@angular/material/divider';
+import { MatFormFieldModule, MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon'
+import { MatInputModule } from '@angular/material/input';
+import { MatListModule } from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select'
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTableModule } from '@angular/material/table';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { AddserverdialogComponent } from './addserverdialog/addserverdialog.component';
 import { serverReducer } from './store/reducers/server.reducers';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
@@ -30,6 +32,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ServerEffects } from './store/effects/server.effects';
 import { ClientinformationComponent } from './clientinformation/clientinformation.component';
 import { AddclientdialogComponent } from './addclientdialog/addclientdialog.component';
+import { ClientMonitoringComponent } from './client-monitoring/client-monitoring.component';
 
 
 @NgModule({
@@ -41,6 +44,7 @@ import { AddclientdialogComponent } from './addclientdialog/addclientdialog.comp
     ServerMonitoringComponent,
     ClientinformationComponent,
     AddclientdialogComponent,
+    ClientMonitoringComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -48,6 +52,7 @@ import { AddclientdialogComponent } from './addclientdialog/addclientdialog.comp
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatCardModule,
     MatDialogModule,
@@ -56,6 +61,7 @@ import { AddclientdialogComponent } from './addclientdialog/addclientdialog.comp
     MatIconModule,
     MatInputModule,
     MatListModule,
+    MatCheckboxModule,
     MatSelectModule,
     MatSidenavModule,
     MatTableModule,
