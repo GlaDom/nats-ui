@@ -14,9 +14,8 @@
             </mat-form-field>
             <mat-form-field class="server-list">
                 <mat-label>Servers</mat-label>
-                <mat-select>
-                    <mat-option>test-server</mat-option>
-                    <mat-option>test-server2</mat-option>
+                <mat-select (selectionChange)="changeSelectedServer($event.value)">
+                    <mat-option *ngFor="let server of servers$" [value]="server.name">{{server.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
             <button  mat-stroked-button extended="">

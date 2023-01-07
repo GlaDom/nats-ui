@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Client } from '../models/client.model';
-import { getSelectedClient } from '../store';
+import { Server } from '../models/server';
+import { getAllServers, getSelectedClient } from '../store';
 import { AppState } from '../store/reducers/server.reducers';
 
 @Component({
@@ -23,6 +24,8 @@ export class ClientMonitoringComponent implements OnInit {
   })
 
   selectedClient: Client;
+  selectedServer: Server;
+  servers$: Server[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,5 +36,16 @@ export class ClientMonitoringComponent implements OnInit {
     this.store.pipe(select(getSelectedClient)).subscribe(state => {
       this.selectedClient = state
     })
+    this.store.pipe(select(getAllServers)).subscribe(state => {
+      this.servers$ = state
+    })
+  }
+
+  changeSelectedServer(event):void {
+    for(let i=0; i< this.servers$.length;i++) {
+      if(this.servers$[i].name == event) {
+        this.selectedServer = this.servers$[i]
+      }
+    }
   }
 }
