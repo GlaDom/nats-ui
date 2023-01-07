@@ -43,3 +43,8 @@ export const getAllClients = createSelector(
     getServerState,
     (state: AppState) => state.clients
 )
+
+export const getSelectedClient = createSelector(
+    getServerState,
+    (state: AppState) => state.selectedClient
+)
