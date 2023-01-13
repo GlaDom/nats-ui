@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { Client } from '../models/client.model';
@@ -16,6 +17,8 @@ import { AppState } from '../store/reducers/server.reducers';
   styleUrls: ['./client-monitoring.component.css']
 })
 export class ClientMonitoringComponent implements OnInit {
+  @ViewChild('paginator') paginator: MatPaginator;
+
   displayedColumns: string[] = ["timestamp", "type", "subject", "message"]
   filters = this.formBuilder.group({
     info: true,
@@ -45,6 +48,10 @@ export class ClientMonitoringComponent implements OnInit {
     this.store.pipe(select(getAllServers)).subscribe(state => {
       this.servers$ = state
     })
+  }
+
+  ngAfterViewInit() {
+    this.messages$.paginator = this.paginator
   }
 
   changeSelectedServer(event):void {

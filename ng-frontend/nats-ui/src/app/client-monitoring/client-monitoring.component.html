@@ -55,6 +55,10 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
             </table>
+            <mat-paginator #paginator
+                [pageSizeOptions]="[10, 20, 40]"
+                showFirstLastButton>
+            </mat-paginator>
         </div>
     </div>
     <mat-divider vertical="true"></mat-divider>
