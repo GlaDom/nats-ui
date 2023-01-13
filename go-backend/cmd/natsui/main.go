@@ -37,38 +37,6 @@ func main() {
 		AllowHeaders: []string{"Origin", "Content-Type"},
 	}))
 
-	// var wsupgrader = websocket.Upgrader{
-	// 	ReadBufferSize:  1024,
-	// 	WriteBufferSize: 1024,
-	// }
-
-	// wshandler := func(w http.ResponseWriter, r *http.Request, nc *nats.Conn) {
-	// 	conn, err := wsupgrader.Upgrade(w, r, nil)
-	// 	if err != nil {
-	// 		fmt.Printf("Failed to set websocket upgrade: %s", err)
-	// 		return
-	// 	}
-
-	// 	ch := make(chan *nats.Msg, 64)
-	// 	sub, err := nc.ChanSubscribe("*", ch)
-	// 	if err != nil {
-	// 		fmt.Print(err)
-	// 	}
-	// 	defer sub.Unsubscribe()
-
-	// 	for {
-	// 		natsmsg := <-ch
-	// 		newMsg := app.Message{
-	// 			Timestamp: time.Now(),
-	// 			Type:      "message",
-	// 			Subject:   natsmsg.Subject,
-	// 			Message:   string(natsmsg.Data),
-	// 		}
-	// 		data, _ := json.Marshal(newMsg)
-	// 		conn.WriteMessage(1, data)
-	// 	}
-	// }
-
 	router.POST("/api/state/server/new", func(ctx *gin.Context) {
 		retval := app.NatsServer{}
 		var err error
