@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 	"time"
@@ -9,7 +8,6 @@ import (
 	"github.com/GlaDom/nats-ui/internal/app"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/gorilla/websocket"
 	"github.com/nats-io/nats.go"
 )
 
@@ -39,37 +37,37 @@ func main() {
 		AllowHeaders: []string{"Origin", "Content-Type"},
 	}))
 
-	var wsupgrader = websocket.Upgrader{
-		ReadBufferSize:  1024,
-		WriteBufferSize: 1024,
-	}
+	// var wsupgrader = websocket.Upgrader{
+	// 	ReadBufferSize:  1024,
+	// 	WriteBufferSize: 1024,
+	// }
 
-	wshandler := func(w http.ResponseWriter, r *http.Request, nc *nats.Conn) {
-		conn, err := wsupgrader.Upgrade(w, r, nil)
-		if err != nil {
-			fmt.Printf("Failed to set websocket upgrade: %s", err)
-			return
-		}
+	// wshandler := func(w http.ResponseWriter, r *http.Request, nc *nats.Conn) {
+	// 	conn, err := wsupgrader.Upgrade(w, r, nil)
+	// 	if err != nil {
+	// 		fmt.Printf("Failed to set websocket upgrade: %s", err)
+	// 		return
+	// 	}
 
-		ch := make(chan *nats.Msg, 64)
-		sub, err := nc.ChanSubscribe("*", ch)
-		if err != nil {
-			fmt.Print(err)
-		}
-		defer sub.Unsubscribe()
+	// 	ch := make(chan *nats.Msg, 64)
+	// 	sub, err := nc.ChanSubscribe("*", ch)
+	// 	if err != nil {
+	// 		fmt.Print(err)
+	// 	}
+	// 	defer sub.Unsubscribe()
 
-		for {
-			natsmsg := <-ch
-			newMsg := app.Message{
-				Timestamp: time.Now(),
-				Type:      "message",
-				Subject:   natsmsg.Subject,
-				Message:   string(natsmsg.Data),
-			}
-			data, _ := json.Marshal(newMsg)
-			conn.WriteMessage(1, data)
-		}
-	}
+	// 	for {
+	// 		natsmsg := <-ch
+	// 		newMsg := app.Message{
+	// 			Timestamp: time.Now(),
+	// 			Type:      "message",
+	// 			Subject:   natsmsg.Subject,
+	// 			Message:   string(natsmsg.Data),
+	// 		}
+	// 		data, _ := json.Marshal(newMsg)
+	// 		conn.WriteMessage(1, data)
+	// 	}
+	// }
 
 	router.POST("/api/state/server/new", func(ctx *gin.Context) {
 		retval := app.NatsServer{}
@@ -155,7 +153,7 @@ func main() {
 			ctx.AbortWithError(http.StatusConflict, fmt.Errorf("failed to connect client to nats server, err: %s", err))
 			return
 		}
-		wshandler(ctx.Writer, ctx.Request, nc)
+		state.Wshandler(ctx.Writer, ctx.Request, nc)
 	})
 
 	router.Run()
