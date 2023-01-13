@@ -34,6 +34,7 @@ export class ClientMonitoringComponent implements OnInit {
   servers$: Server[];
   messages$ = new MatTableDataSource<Message>();
   destroyed$ = new Subject();
+  subcribed: boolean = false;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -63,6 +64,7 @@ export class ClientMonitoringComponent implements OnInit {
   }
 
   getMessagesForClient() {
+    this.subcribed = true
     this.webSocket.connect().pipe(
       takeUntil(this.destroyed$)
     ).subscribe(message => {
@@ -71,5 +73,10 @@ export class ClientMonitoringComponent implements OnInit {
       let newData = this.messages$.data
       this.messages$.data = newData
     })
+  }
+
+  unsubscribe() {
+    this.subcribed = false
+    this.webSocket.ngOnDestroy()
   }
 }
