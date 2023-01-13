@@ -8,6 +8,7 @@ import (
 	"github.com/GlaDom/nats-ui/internal/app"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/nats-io/nats.go"
 )
 
 func main() {
@@ -101,6 +102,26 @@ func main() {
 			}
 		}
 		ctx.JSON(http.StatusOK, &retval)
+	})
+
+	router.GET("api/state/client/add", func(ctx *gin.Context) {
+		serverHost, ok := ctx.GetQuery("hostname")
+		if !ok {
+			ctx.AbortWithError(http.StatusBadRequest, fmt.Errorf("no hostname provided"))
+			return
+		}
+		port, ok := ctx.GetQuery("port")
+		if !ok {
+			ctx.AbortWithError(http.StatusBadRequest, fmt.Errorf("no port provided"))
+			return
+		}
+
+		nc, err := nats.Connect(fmt.Sprintf("nats://%s:%s", serverHost, port))
+		if err != nil {
+			ctx.AbortWithError(http.StatusConflict, fmt.Errorf("failed to connect client to nats server, err: %s", err))
+			return
+		}
+		state.Wshandler(ctx.Writer, ctx.Request, nc)
 	})
 
 	router.Run()

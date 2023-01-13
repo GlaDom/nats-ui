@@ -33,7 +33,7 @@ type SubjectTreeNode struct {
 	ID         string
 	SubjectStr string
 	Subjects   []*SubjectTreeNode
-	selected   bool
+	Selected   bool
 }
 
 type Jetstream struct {
@@ -174,4 +174,11 @@ type Leafz struct {
 
 type Uri struct {
 	Index uint64 `json:"index" uri:"index"`
+}
+
+type Message struct {
+	Timestamp time.Time `json:"timestamp"`
+	Type      string    `json:"type"`
+	Subject   string    `json:"subject"`
+	Message   string    `json:"message"`
 }

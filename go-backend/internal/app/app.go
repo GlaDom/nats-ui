@@ -6,16 +6,28 @@ import (
 	"io/ioutil"
 	"net/http"
 	"sync"
+	"time"
+
+	"github.com/gorilla/websocket"
+	"github.com/nats-io/nats.go"
 )
 
 type App struct {
-	Mu      sync.Mutex
-	Servers []NatsServer
-	Clients []Client
+	Mu         sync.Mutex
+	wsupgrader websocket.Upgrader
+	Servers    []NatsServer
+	Clients    []Client
 }
 
 func NewApp() *App {
-	return &App{}
+	upgrader := websocket.Upgrader{
+		ReadBufferSize:  1024,
+		WriteBufferSize: 1024,
+		CheckOrigin:     func(r *http.Request) bool { return true },
+	}
+	return &App{
+		wsupgrader: upgrader,
+	}
 }
 
 func (a *App) UpdateVarz(s NatsServer) (*Varz, error) {
@@ -51,4 +63,31 @@ func (a *App) getVarz(s NatsServer) (Varz, error) {
 	}
 
 	return retval, nil
+}
+
+func (a *App) Wshandler(w http.ResponseWriter, r *http.Request, nc *nats.Conn) {
+	conn, err := a.wsupgrader.Upgrade(w, r, nil)
+	if err != nil {
+		fmt.Printf("Failed to set websocket upgrade: %s", err)
+		return
+	}
+
+	ch := make(chan *nats.Msg, 64)
+	sub, err := nc.ChanSubscribe("*", ch)
+	if err != nil {
+		fmt.Print(err)
+	}
+	defer sub.Unsubscribe()
+
+	for {
+		natsmsg := <-ch
+		newMsg := Message{
+			Timestamp: time.Now(),
+			Type:      "message",
+			Subject:   natsmsg.Subject,
+			Message:   string(natsmsg.Data),
+		}
+		data, _ := json.Marshal(newMsg)
+		conn.WriteMessage(1, data)
+	}
 }
