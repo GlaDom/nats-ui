@@ -65,7 +65,7 @@ export class ClientMonitoringComponent implements OnInit {
 
   getMessagesForClient() {
     this.subcribed = true
-    this.webSocket.connect().pipe(
+    this.webSocket.connect(this.selectedServer.host, this.selectedServer.port.toString()).pipe(
       takeUntil(this.destroyed$)
     ).subscribe(message => {
       console.log(message)

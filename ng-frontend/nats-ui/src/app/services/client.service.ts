@@ -15,8 +15,8 @@ export class ClientService {
     private store: Store<AppState>
   ) { }
 
-  connect(): Observable<Message> {
-    return of("http://localhost:8080/api/state/client/add?hostname=172.18.0.2&port=4222").pipe(
+  connect(hostname: string, port: string): Observable<Message> {
+    return of(`http://localhost:8080/api/state/client/add?hostname=${hostname}&port=${port}`).pipe(
       map(apiUrl => apiUrl.replace("http", "ws")),
       switchMap(wsUrl => {
         if (this.socket$) {
