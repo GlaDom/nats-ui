@@ -33,7 +33,7 @@ type SubjectTreeNode struct {
 	ID         string
 	SubjectStr string
 	Subjects   []*SubjectTreeNode
-	selected   bool
+	Selected   bool
 }
 
 type Jetstream struct {
