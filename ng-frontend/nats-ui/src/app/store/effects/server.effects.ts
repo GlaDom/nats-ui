@@ -20,7 +20,7 @@ export class ServerEffects {
         this.actions$.pipe(
             ofType<AddServer>(ActionTypes.AddServer),
             switchMap((action) => 
-                from(this.serverService.addNewServer(action.payload, "http://localhost:8080/api/state/server/new")).pipe(
+                from(this.serverService.addNewServer(action.payload, "http://127.0.0.1:8080/api/state/server/new")).pipe(
                     map((data) => new AddServerSuccess(data)),
                     catchError(async () => new AddServerFailure())
                 ))
@@ -30,7 +30,7 @@ export class ServerEffects {
         this.actions$.pipe(
             ofType<LoadServerMonitoringStats>(ActionTypes.LoadServerMonitoringStats),
             switchMap((action) => 
-                from(this.serverService.getServerMonitoringStats(action.payload, "http://localhost:8080/api/state/server/monitoring")).pipe(
+                from(this.serverService.getServerMonitoringStats(action.payload, "http://127.0.0.1:8080/api/state/server/monitoring")).pipe(
                     map((data) => new LoadServerMonitoringStatsSuccess(data),
                     catchError(async () => new LoadServerMonitoringStatsFailure()))
                 ))
@@ -40,7 +40,7 @@ export class ServerEffects {
         this.actions$.pipe(
             ofType<DeleteServer>(ActionTypes.DeleteServer),
             switchMap((action) =>
-                from(this.serverService.deleteServer(action.payload, "http://localhost:8080/api/state/server/delete")).pipe(
+                from(this.serverService.deleteServer(action.payload, "http://127.0.0.1:8080/api/state/server/delete")).pipe(
                     map((data) => new DeleteServerSuccess(data),
                     catchError(async () => new DeleteServerFailure()))
                 ))
