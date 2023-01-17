@@ -16,7 +16,7 @@ export class ClientService {
   ) { }
 
   connect(hostname: string, port: string): Observable<Message> {
-    return of(`http://localhost:8080/api/state/client/add?hostname=${hostname}&port=${port}`).pipe(
+    return of(`http://127.0.0.1:8080/api/state/client/add?hostname=${hostname}&port=${port}`).pipe(
       map(apiUrl => apiUrl.replace("http", "ws")),
       switchMap(wsUrl => {
         if (this.socket$) {
