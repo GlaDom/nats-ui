@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"path"
+	"path/filepath"
 	"time"
 
 	"github.com/GlaDom/nats-ui/internal/app"
@@ -32,10 +34,21 @@ func main() {
 
 	router := gin.Default()
 	router.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"http://localhost:4200"},
-		AllowMethods: []string{"GET", "POST", "DELETE"},
-		AllowHeaders: []string{"Origin", "Content-Type"},
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{"POST", "HEAD", "PATCH", "OPTIONS", "GET", "PUT", "DELETE"},
+		AllowHeaders: []string{"Content-Type", "Content-Length", "Accept-Encoding", "X-CSRF-Token", "Authorization", "accept", "origin", "Cache-Control", "X-Requested-With"},
+		MaxAge:       12 * time.Hour,
 	}))
+
+	router.NoRoute(func(c *gin.Context) {
+		dir, file := path.Split(c.Request.RequestURI)
+		ext := filepath.Ext(file)
+		if file == "" || ext == "" {
+			c.File("../../dist/nats-ui/index.html")
+		} else {
+			c.File("../../dist/nats-ui/" + path.Join(dir, file))
+		}
+	})
 
 	router.POST("/api/state/server/new", func(ctx *gin.Context) {
 		retval := app.NatsServer{}
