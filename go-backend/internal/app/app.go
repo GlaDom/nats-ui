@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 	"sync"
 	"time"
 
@@ -73,7 +74,7 @@ func (a *App) Wshandler(w http.ResponseWriter, r *http.Request, nc *nats.Conn) {
 	}
 
 	ch := make(chan *nats.Msg, 64)
-	sub, err := nc.ChanSubscribe("*", ch)
+	sub, err := nc.ChanSubscribe(">", ch)
 	if err != nil {
 		fmt.Print(err)
 	}
@@ -81,6 +82,9 @@ func (a *App) Wshandler(w http.ResponseWriter, r *http.Request, nc *nats.Conn) {
 
 	for {
 		natsmsg := <-ch
+		if strings.Contains(natsmsg.Subject, "$SYS.") {
+			continue
+		}
 		newMsg := Message{
 			Timestamp: time.Now(),
 			Type:      "message",
