@@ -45,6 +45,25 @@
     align-items: center;
 }
 
+.mat-column-timestamp {
+    width: 18%;
+    min-width: 200px;
+}
+
+.mat-column-type {
+    width: 10%;
+}
+
+.mat-column-subject {
+    width: 25%;
+}
+
+.mat-column-message {
+    width: 47%;
+    max-width: 602px;
+    word-break: break-word;
+}
+
 span {
     font-weight: 600;
 }
@@ -55,4 +74,8 @@ p {
 
 button {
     height: 56px;
+}
+
+mat-divider {
+    height:  100%;
 }
