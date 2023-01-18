@@ -69,7 +69,7 @@ export class ClientMonitoringComponent implements OnInit {
       takeUntil(this.destroyed$)
     ).subscribe(message => {
       console.log(message)
-      this.messages$.data.push(message)
+      this.messages$.data.unshift(message)
       let newData = this.messages$.data
       this.messages$.data = newData
     })

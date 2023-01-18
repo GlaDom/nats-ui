@@ -1,5 +1,5 @@
 export interface Message {
-    timestamp?: Date,
+    timestamp?: string,
     subject?: string,
     type?: string,
     message?: string,
