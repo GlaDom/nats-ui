@@ -86,7 +86,7 @@ func (a *App) Wshandler(w http.ResponseWriter, r *http.Request, nc *nats.Conn) {
 			continue
 		}
 		newMsg := Message{
-			Timestamp: time.Now(),
+			Timestamp: time.Now().Format("2006-01-02T15:04:05Z07:00"),
 			Type:      "message",
 			Subject:   natsmsg.Subject,
 			Message:   string(natsmsg.Data),

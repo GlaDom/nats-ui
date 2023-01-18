@@ -177,8 +177,8 @@ type Uri struct {
 }
 
 type Message struct {
-	Timestamp time.Time `json:"timestamp"`
-	Type      string    `json:"type"`
-	Subject   string    `json:"subject"`
-	Message   string    `json:"message"`
+	Timestamp string `json:"timestamp"`
+	Type      string `json:"type"`
+	Subject   string `json:"subject"`
+	Message   string `json:"message"`
 }
