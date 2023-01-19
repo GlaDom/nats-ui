@@ -18,10 +18,10 @@
                     <mat-option *ngFor="let server of servers$" [value]="server.name">{{server.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
-            <button *ngIf="!subcribed" mat-stroked-button extended="" (click)="getMessagesForClient()">
+            <button *ngIf="!subcribed" class="subscribe-button" (click)="getMessagesForClient()">
                 <span>Subscribe</span>
             </button>
-            <button *ngIf="subcribed" mat-stroked-button extended="" (click)="unsubscribe()">
+            <button *ngIf="subcribed" class="subscribe-button" (click)="unsubscribe()">
                 <span>Unsubscribe</span>
             </button>
         </div>

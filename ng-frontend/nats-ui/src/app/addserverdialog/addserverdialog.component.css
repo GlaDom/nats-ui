@@ -82,3 +82,7 @@ span {
     padding-right: 10px;
     text-align: right;
 }
+
+button {
+    cursor: pointer;
+}

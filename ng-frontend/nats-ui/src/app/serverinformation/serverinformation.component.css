@@ -27,8 +27,10 @@ button {
     font-weight: bold;
     background-color: #49454F;
     color: white;
+    border-width: 1px;
     border-radius: 20px;
     border-color: #49454F;
+    cursor: pointer;
 }
 
 span {
