@@ -19,6 +19,7 @@ import { AppState } from '../store/reducers/server.reducers';
 export class ClientMonitoringComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
 
+  filterString: string = "error$info$message$ok$ping$pong"
   displayedColumns: string[] = ["timestamp", "type", "subject", "message"]
   filters = this.formBuilder.group({
     info: true,
@@ -49,6 +50,32 @@ export class ClientMonitoringComponent implements OnInit {
     this.store.pipe(select(getAllServers)).subscribe(state => {
       this.servers$ = state
     })
+    //applyFilter()
+    this.filters.valueChanges.subscribe(values => {
+      this.filterString = "";
+      let filterArray = [];
+      if (values.err) {
+        filterArray.push("error")
+      }
+      if (values.info) {
+        filterArray.push("info")
+      }
+      if (values.msg) {
+        filterArray.push("message")
+      }
+      if (values.ok) {
+        filterArray.push("ok")
+      }
+      if (values.ping) {
+        filterArray.push("ping")
+      }
+      if (values.pong) {
+        filterArray.push("pong")
+      }
+      this.filterString = filterArray.join("$")
+      this.messages$.filter = this.filterString.toLocaleLowerCase()
+    })
+    this.messages$.filterPredicate = this.getFilterPredicate();
   }
 
   ngAfterViewInit() {
@@ -64,11 +91,11 @@ export class ClientMonitoringComponent implements OnInit {
   }
 
   getMessagesForClient() {
-    this.subcribed = true
+    this.messages$.filter = this.filterString;
+    this.subcribed = true;
     this.webSocket.connect(this.selectedServer.host, this.selectedServer.port.toString()).pipe(
       takeUntil(this.destroyed$)
     ).subscribe(message => {
-      console.log(message)
       this.messages$.data.unshift(message)
       let newData = this.messages$.data
       this.messages$.data = newData
@@ -78,5 +105,28 @@ export class ClientMonitoringComponent implements OnInit {
   unsubscribe() {
     this.subcribed = false
     this.webSocket.ngOnDestroy()
+  }
+
+  getFilterPredicate() {
+    return (row: Message, filter: string) => {
+      const filterArray = filter.split("$")
+
+      const matchFilter = [];
+
+      const columnType = row.type
+
+      let customFilterType = false;
+
+      for(let i=0; i<filterArray.length;i++) {
+        customFilterType = columnType.toLowerCase().includes(filterArray[i])
+        if (customFilterType) {
+          break
+        }
+      }
+
+      matchFilter.push(customFilterType)
+
+      return matchFilter.every(Boolean)
+    }
   }
 }
