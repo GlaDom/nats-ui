@@ -14,6 +14,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 10px;
+
 }
 
 .nav-tree {
@@ -45,23 +46,33 @@
     align-items: center;
 }
 
+.subscribe-button {
+    height: 60px;
+}
+
 .mat-column-timestamp {
     width: 18%;
     min-width: 200px;
+    font-size: small;
 }
 
 .mat-column-type {
     width: 10%;
+    word-break: break-word;
+    font-size: small;
 }
 
 .mat-column-subject {
     width: 25%;
+    word-break: break-word;
+    font-size: small;
 }
 
 .mat-column-message {
     width: 47%;
     max-width: 602px;
     word-break: break-word;
+    font-size: small;
 }
 
 span {
@@ -74,7 +85,19 @@ p {
 
 button {
     height: 56px;
+    width: 124px;
+    border-width: 1px;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    margin-left: 10px;
+    padding-bottom: 0px;
 }
+
+button:hover {
+    background-color: #F5F5F5;
+    transition: 0.2s;
+  }
 
 mat-divider {
     height:  100%;

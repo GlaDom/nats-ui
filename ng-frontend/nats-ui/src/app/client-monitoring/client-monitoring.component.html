@@ -18,20 +18,20 @@
                     <mat-option *ngFor="let server of servers$" [value]="server.name">{{server.name}}</mat-option>
                 </mat-select>
             </mat-form-field>
-            <button *ngIf="!subcribed" mat-stroked-button extended="" (click)="getMessagesForClient()">
+            <button *ngIf="!subcribed" class="subscribe-button" (click)="getMessagesForClient()">
                 <span>Subscribe</span>
             </button>
-            <button *ngIf="subcribed" mat-stroked-button extended="" (click)="unsubscribe()">
+            <button *ngIf="subcribed" class="subscribe-button" (click)="unsubscribe()">
                 <span>Unsubscribe</span>
             </button>
         </div>
         <div class="filters" [formGroup]="filters">
             <p><mat-checkbox formControlName="info">Info</mat-checkbox></p>
-            <p><mat-checkbox formControlName="info">Ping</mat-checkbox></p>
-            <p><mat-checkbox formControlName="info">Pong</mat-checkbox></p>
-            <p><mat-checkbox formControlName="info">Ok</mat-checkbox></p>
-            <p><mat-checkbox formControlName="info">Err</mat-checkbox></p>
-            <p><mat-checkbox formControlName="info">Msg</mat-checkbox></p>
+            <p><mat-checkbox formControlName="ping">Ping</mat-checkbox></p>
+            <p><mat-checkbox formControlName="pong">Pong</mat-checkbox></p>
+            <p><mat-checkbox formControlName="ok">Ok</mat-checkbox></p>
+            <p><mat-checkbox formControlName="err">Err</mat-checkbox></p>
+            <p><mat-checkbox formControlName="msg">Msg</mat-checkbox></p>
         </div>
         <div class="client-table">
             <table mat-table [dataSource]="messages$">
