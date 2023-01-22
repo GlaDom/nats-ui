@@ -36,7 +36,7 @@ func (a *App) UpdateVarz(s NatsServer) (*Varz, error) {
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(newVarz)
+	// fmt.Println(newVarz)
 	return &newVarz, nil
 }
 
