@@ -23,10 +23,10 @@ export class ClientMonitoringComponent implements OnInit {
   displayedColumns: string[] = ["timestamp", "type", "subject", "message"]
   filters = this.formBuilder.group({
     info: true,
-    ping: true,
-    pong: true,
-    ok: true,
-    err: true,
+    // ping: true,
+    // pong: true,
+    // ok: true,
+    // err: true,
     msg: true
   })
   
@@ -54,24 +54,24 @@ export class ClientMonitoringComponent implements OnInit {
     this.filters.valueChanges.subscribe(values => {
       this.filterString = "";
       let filterArray = [];
-      if (values.err) {
-        filterArray.push("error")
-      }
+      // if (values.err) {
+      //   filterArray.push("error")
+      // }
       if (values.info) {
         filterArray.push("info")
       }
       if (values.msg) {
         filterArray.push("message")
       }
-      if (values.ok) {
-        filterArray.push("ok")
-      }
-      if (values.ping) {
-        filterArray.push("ping")
-      }
-      if (values.pong) {
-        filterArray.push("pong")
-      }
+      // if (values.ok) {
+      //   filterArray.push("ok")
+      // }
+      // if (values.ping) {
+      //   filterArray.push("ping")
+      // }
+      // if (values.pong) {
+      //   filterArray.push("pong")
+      // }
       this.filterString = filterArray.join("$")
       this.messages$.filter = this.filterString.toLocaleLowerCase()
     })
