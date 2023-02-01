@@ -27,7 +27,11 @@ export class ServerMonitoringComponent implements OnInit {
       port: 0,
       monitoringport: 0,
       varz: null,
-      subz: null
+      subz: null,
+      msgRateIn: 0,
+      msgRateOut: 0,
+      dataRateIn: 0,
+      dataRateOut: 0,
     };
   }
 

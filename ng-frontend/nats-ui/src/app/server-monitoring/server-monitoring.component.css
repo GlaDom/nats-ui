@@ -8,6 +8,7 @@
     display: grid;
     grid-template-columns: 100%;
     grid-template-rows: 56px 84px 217px 200px 120px;
+    margin-right: 10px;
 }
 
 .right-container {
@@ -17,6 +18,8 @@
 }
 
 .nav-tree {
+    display: flex;
+    align-items: center;
     margin-top: 20px;
     font-weight: 600;
 }
@@ -74,7 +77,7 @@
 
 .values {
     font-weight: 600;
-    font-size: 30pt;
+    font-size: 28pt;
 }
 
 .small-card-title {

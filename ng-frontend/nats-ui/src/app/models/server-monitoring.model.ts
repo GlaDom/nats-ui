@@ -12,6 +12,10 @@ export interface ServerMonitoring {
     monitoringport?: number;
     varz?:           Varz;
     subz?:           null;
+    msgRateIn?: number;
+    msgRateOut?: number;
+    dataRateIn?: number;
+    dataRateOut?: number;
 }
 
 export interface Varz {

@@ -87,6 +87,7 @@ export function serverReducer(
             const newServerArray: Server[] = [];
             state.servers.forEach(server => {
                 newServerArray.push(Object.assign({}, server))})
+            console.log(index)
             newServerArray[index].status = 'connected'
             newServerArray[index].connections = action.payload.varz.connections
             newServerArray[index].bytesIn = action.payload.varz.in_bytes

@@ -2,7 +2,9 @@
     <div class="left-container">
         <div class="nav-tree">
             <span>NATS-WebUI</span>
+            <mat-icon>keyboard_arrow_right</mat-icon>
             <span>Servers</span>
+            <mat-icon>keyboard_arrow_right</mat-icon>
             <span>{{selectedServer$.name}}</span>
         </div>
         <div class="server-name">
@@ -13,37 +15,37 @@
             <div class="upper-key-values">
                 <mat-card>
                     <span class="card-title">Total In Messages</span>
-                    <span class="values">{{serverStats?.varz?.in_msgs ?? 0}}</span>
+                    <span class="values">{{serverStats?.varz?.in_msgs ?? 0 | number}}</span>
                 </mat-card>
                 <mat-card>
                     <span class="card-title">Total Messages Out</span>
-                    <span class="values">{{serverStats?.varz?.out_msgs ?? 0}}</span>
+                    <span class="values">{{serverStats?.varz?.out_msgs ?? 0 | number}}</span>
                 </mat-card>
                 <mat-card>
                     <span class="card-title">Total Data Volume In</span>
-                    <span class="values">{{serverStats?.varz?.in_bytes ?? 0}}</span>
+                    <span class="values">{{serverStats?.varz?.in_bytes ?? 0 | byteUnit}}</span>
                 </mat-card>
                 <mat-card>
                     <span class="card-title">Total Data Volume Out</span>
-                    <span class="values">{{serverStats?.varz?.out_bytes ?? 0}}</span>
+                    <span class="values">{{serverStats?.varz?.out_bytes ?? 0 | byteUnit}}</span>
                 </mat-card>
             </div>
             <div class="lower-key-values">
                 <mat-card>
                     <span class="card-title">Messages In Rate</span>
-                    <span class="values"></span>
+                    <span class="values">{{serverStats?.varz?.in_msgs | messageRate:serverStats?.varz?.uptime:'m/s'}}</span>
                 </mat-card>
                 <mat-card>
                     <span class="card-title">Messages Out Rate</span>
-                    <span class="values"></span>
+                    <span class="values">{{serverStats?.varz?.out_msgs | messageRate:serverStats?.varz?.uptime:'m/s'}}</span>
                 </mat-card>
                 <mat-card>
                     <span class="card-title">Incoming Data Rate</span>
-                    <span class="values"></span>
+                    <span class="values">{{serverStats?.varz?.in_bytes | messageRate:serverStats?.varz?.uptime:'B/s'}}</span>
                 </mat-card>
                 <mat-card>
                     <span class="card-title">Outgoing Data Rate</span>
-                    <span class="values"></span>
+                    <span class="values">{{serverStats?.varz?.out_bytes | messageRate:serverStats?.varz?.uptime:'B/s'}}</span>
                 </mat-card>
             </div>
         </div>
@@ -53,23 +55,23 @@
         <div class="meta-data">
             <mat-card class="meta-card">
                 <span class="small-card-title">CPU Usage</span>
-                <span class="meta-values">{{serverStats?.varz?.cpu ?? 0}}</span>
+                <span class="meta-values">{{serverStats?.varz?.cpu ?? 0 | byteUnit}}</span>
             </mat-card>
             <mat-card class="meta-card">
                 <span class="small-card-title">Mem Usage</span>
-                <span class="meta-values"></span>
+                <span class="meta-values">{{serverStats?.varz?.mem ?? 0 | byteUnit}}</span>
             </mat-card>
             <mat-card class="meta-card">
                 <span class="small-card-title">Connections</span>
-                <span class="meta-values">{{serverStats?.varz?.connections ?? 0}}</span>
+                <span class="meta-values">{{serverStats?.varz?.connections ?? 0 | number}}</span>
             </mat-card>
             <mat-card class="meta-card">
                 <span class="small-card-title">Subscriptions</span>
-                <span class="meta-values">{{serverStats?.varz?.subscriptions ?? 0}}</span>
+                <span class="meta-values">{{serverStats?.varz?.subscriptions ?? 0 | number}}</span>
             </mat-card>
             <mat-card class="meta-card">
                 <span class="small-card-title">Slow Consumers</span>
-                <span class="meta-values">{{serverStats?.varz?.slow_consumers ?? 0}}</span>
+                <span class="meta-values">{{serverStats?.varz?.slow_consumers ?? 0 | number}}</span>
             </mat-card>
             <mat-card class="meta-card">
                 <span class="small-card-title">Uptime</span>
