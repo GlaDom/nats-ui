@@ -3,7 +3,7 @@ import { ServerMonitoring } from '../models/server-monitoring.model';
 import { LoadServerMonitoringStats } from '../store/actions/server.actions';
 import { AppState } from '../store/reducers/server.reducers';
 import { select, Store } from '@ngrx/store'
-import { Observable } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 import { getSelectedServer, getServerMonitoringStats } from '../store';
 import { Server } from '../models/server';
 
@@ -15,6 +15,7 @@ import { Server } from '../models/server';
 export class ServerMonitoringComponent implements OnInit {
   serverStats: ServerMonitoring;
   selectedServer$: Server;
+  monitoringSubscription: Subscription;
 
   constructor(
     private store: Store<AppState>
@@ -26,15 +27,26 @@ export class ServerMonitoringComponent implements OnInit {
       port: 0,
       monitoringport: 0,
       varz: null,
-      subz: null
+      subz: null,
+      msgRateIn: 0,
+      msgRateOut: 0,
+      dataRateIn: 0,
+      dataRateOut: 0,
     };
   }
 
   ngOnInit(): void {
     this.store.pipe(select(getSelectedServer)).subscribe(state => 
       this.selectedServer$ = state)
-    this.store.dispatch(new LoadServerMonitoringStats(this.selectedServer$))
+    this.monitoringSubscription =  interval(5000).subscribe(x => {
+      this.store.dispatch(new LoadServerMonitoringStats(this.selectedServer$))
+    })
     this.store.pipe(select(getServerMonitoringStats)).subscribe(state => 
       this.serverStats = state)
   }
+
+  ngOnDestroy() {
+    this.monitoringSubscription.unsubscribe()
+  }
+  
 }

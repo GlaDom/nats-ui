@@ -12,6 +12,7 @@
 .nav-tree {
     display: flex;
     align-items: center;
+    margin-top: 20px;
 }
 
 .lower-div {
@@ -35,4 +36,8 @@ button {
 
 span {
     font-weight: 600;
+}
+
+mat-icon {
+    cursor: pointer;
 }

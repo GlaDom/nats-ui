@@ -34,27 +34,27 @@
     
             <ng-container matColumnDef="connections">
                 <th mat-header-cell *matHeaderCellDef> Connections </th>
-                <td mat-cell *matCellDef="let server"> {{server.connections}}</td>
+                <td mat-cell *matCellDef="let server"> {{server.connections | number}}</td>
             </ng-container>
     
             <ng-container matColumnDef="messagesIn">
                 <th mat-header-cell *matHeaderCellDef> Messages In </th>
-                <td mat-cell *matCellDef="let server"> {{server.messagesIn}}</td>
+                <td mat-cell *matCellDef="let server"> {{server.messagesIn | number}}</td>
             </ng-container>
     
             <ng-container matColumnDef="messagesOut">
                 <th mat-header-cell *matHeaderCellDef> Messages Out </th>
-                <td mat-cell *matCellDef="let server"> {{server.messagesOut}}</td>
+                <td mat-cell *matCellDef="let server"> {{server.messagesOut | number}}</td>
             </ng-container>
     
             <ng-container matColumnDef="bytesIn">
                 <th mat-header-cell *matHeaderCellDef> Bytes In </th>
-                <td mat-cell *matCellDef="let server"> {{server.bytesIn}}</td>
+                <td mat-cell *matCellDef="let server"> {{server.bytesIn | byteUnit}}</td>
             </ng-container>
     
             <ng-container matColumnDef="bytesOut">
                 <th mat-header-cell *matHeaderCellDef> Bytes Out </th>
-                <td mat-cell *matCellDef="let server"> {{server.bytesOut}}</td>
+                <td mat-cell *matCellDef="let server"> {{server.bytesOut | byteUnit}}</td>
             </ng-container>
     
             <ng-container matColumnDef="status">

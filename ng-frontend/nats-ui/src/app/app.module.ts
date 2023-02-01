@@ -34,6 +34,8 @@ import { ServerEffects } from './store/effects/server.effects';
 import { ClientinformationComponent } from './clientinformation/clientinformation.component';
 import { AddclientdialogComponent } from './addclientdialog/addclientdialog.component';
 import { ClientMonitoringComponent } from './client-monitoring/client-monitoring.component';
+import { ByteUnitPipe } from './shared/byte-unit.pipe';
+import { MessageRatePipe } from './shared/message-rate.pipe';
 
 
 @NgModule({
@@ -46,6 +48,8 @@ import { ClientMonitoringComponent } from './client-monitoring/client-monitoring
     ClientinformationComponent,
     AddclientdialogComponent,
     ClientMonitoringComponent,
+    ByteUnitPipe,
+    MessageRatePipe,
   ],
   imports: [
     AppRoutingModule,
