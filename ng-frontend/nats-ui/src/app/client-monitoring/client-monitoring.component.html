@@ -26,12 +26,21 @@
             </button>
         </div>
         <div class="filters" [formGroup]="filters">
-            <p><mat-checkbox formControlName="info">Info</mat-checkbox></p>
-            <!-- <p><mat-checkbox formControlName="ping">Ping</mat-checkbox></p>
-            <p><mat-checkbox formControlName="pong">Pong</mat-checkbox></p>
-            <p><mat-checkbox formControlName="ok">Ok</mat-checkbox></p>
-            <p><mat-checkbox formControlName="err">Err</mat-checkbox></p> -->
-            <p><mat-checkbox formControlName="msg">Msg</mat-checkbox></p>
+            <div class="filter-boxes">
+                <p><mat-checkbox formControlName="info">Info</mat-checkbox></p>
+                <!-- <p><mat-checkbox formControlName="ping">Ping</mat-checkbox></p>
+                <p><mat-checkbox formControlName="pong">Pong</mat-checkbox></p>
+                <p><mat-checkbox formControlName="ok">Ok</mat-checkbox></p>
+                <p><mat-checkbox formControlName="err">Err</mat-checkbox></p> -->
+                <p><mat-checkbox formControlName="msg">Msg</mat-checkbox></p>
+            </div>
+            <mat-form-field class="filter-input">
+                <mat-label>Filter</mat-label>
+                <input matInput type="text" placeholder="search">
+                <button matSuffix mat-icon-button arial-label="Clear">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
         </div>
         <div class="client-table">
             <table mat-table [dataSource]="messages$">
