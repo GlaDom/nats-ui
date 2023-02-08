@@ -19,7 +19,7 @@ import { AppState } from '../store/reducers/server.reducers';
 export class ClientMonitoringComponent implements OnInit {
   @ViewChild('paginator') paginator: MatPaginator;
 
-  filterString: string = "error$info$message$ok$ping$pong"
+  filterString: string = "info$message"
   displayedColumns: string[] = ["timestamp", "type", "subject", "message"]
   filters = this.formBuilder.group({
     info: true,
@@ -27,7 +27,8 @@ export class ClientMonitoringComponent implements OnInit {
     // pong: true,
     // ok: true,
     // err: true,
-    msg: true
+    msg: true,
+    stringFilter: "",
   })
   
   selectedClient: Client;
@@ -62,6 +63,9 @@ export class ClientMonitoringComponent implements OnInit {
       }
       if (values.msg) {
         filterArray.push("message")
+      }
+      if (values.stringFilter != "") {
+        filterArray.push(values.stringFilter)
       }
       // if (values.ok) {
       //   filterArray.push("ok")
@@ -110,22 +114,34 @@ export class ClientMonitoringComponent implements OnInit {
   getFilterPredicate() {
     return (row: Message, filter: string) => {
       const filterArray = filter.split("$")
-
+      console.log(filterArray)
       const matchFilter = [];
 
       const columnType = row.type
+      const columnSubject = row.subject
 
       let customFilterType = false;
+      let customFilterSubject = false;
 
       for(let i=0; i<filterArray.length;i++) {
         customFilterType = columnType.toLowerCase().includes(filterArray[i])
-        if (customFilterType) {
+        console.log(columnType.toLowerCase(), customFilterType)
+        customFilterSubject = columnSubject.toLocaleLowerCase().includes(filterArray[i])
+        console.log(columnSubject.toLowerCase(), customFilterSubject)
+        if (customFilterType || customFilterSubject) {
           break
         }
       }
 
-      matchFilter.push(customFilterType)
-
+      if(customFilterType && !customFilterSubject){
+        matchFilter.push(customFilterType)
+      } else if(customFilterSubject && !customFilterType) {
+        matchFilter.push(customFilterSubject)
+      } else if(customFilterSubject && customFilterType) {
+        matchFilter.push(customFilterSubject)
+      } else {
+        matchFilter.push(false)
+      }
       return matchFilter.every(Boolean)
     }
   }
