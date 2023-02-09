@@ -25,7 +25,7 @@ export const initialState: AppState = {
     },
     clients: [],
     selectedClient: {},
-    showServerInformation: false,
+    showServerInformation: true,
     showServerMonitoring: false,
     showClientInformation: false,
     showClientMonitoring: false
