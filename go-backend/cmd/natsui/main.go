@@ -27,7 +27,8 @@ func main() {
 				state.Servers[i].Varz = newVarz
 			}
 			state.Mu.Unlock()
-			fmt.Println(state.Servers)
+			fmt.Printf("%+v", state.Servers)
+			fmt.Println()
 			time.Sleep(time.Second * 5)
 		}
 	}(state)

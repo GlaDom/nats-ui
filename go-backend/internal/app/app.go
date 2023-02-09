@@ -78,7 +78,21 @@ func (a *App) Wshandler(w http.ResponseWriter, r *http.Request, nc *nats.Conn) {
 	if err != nil {
 		fmt.Print(err)
 	}
-	defer sub.Unsubscribe()
+
+	go func() {
+		var msg Message
+		_, p, err := conn.ReadMessage()
+		if err != nil {
+			fmt.Println(err)
+		}
+		err = json.Unmarshal(p, &msg)
+		if err != nil {
+			fmt.Println(err)
+		}
+		if msg.Message == "stop" {
+			sub.Unsubscribe()
+		}
+	}()
 
 	for {
 		natsmsg := <-ch
