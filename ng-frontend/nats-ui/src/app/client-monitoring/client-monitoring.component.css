@@ -7,14 +7,13 @@
 .left-container {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 56px 84px 10% 200px 120px;
+    grid-template-rows: 56px 84px 84px 200px 120px;
 }
 
 .right-container {
     display: flex;
     flex-direction: column;
     margin-left: 10px;
-
 }
 
 .nav-tree {
@@ -43,7 +42,20 @@
 .filters {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    /* align-items: center; */
+}
+
+.filter-boxes {
+    width: 25%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.filter-input {
+    width: 60%;
+    margin-left: 19px;
+    margin-top: 6px;
 }
 
 .subscribe-button {

@@ -37,6 +37,11 @@ export class ClientService {
   }
   
   ngOnDestroy() {
+    let unsubscribeMessage: Message = {
+      message: 'stop',
+      subject: 'end',
+    }
+    this.socket$.next(unsubscribeMessage)
     this.closeConnection();
   }
 }
