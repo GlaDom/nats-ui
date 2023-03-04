@@ -13,6 +13,7 @@ import { AppState } from '../store/reducers/server.reducers';
   styleUrls: ['./clientinformation.component.css']
 })
 export class ClientinformationComponent implements OnInit {
+  displayPlaceholder:boolean = true;
   clients$: Client[] = [];
   displayedColumns: string[] = ["name", "serveraddress", "operations"]
   addClientDialogRef?: MatDialogRef<AddclientdialogComponent>;
@@ -26,6 +27,9 @@ export class ClientinformationComponent implements OnInit {
     this.store.dispatch(new LoadAllClients)
     this.store.pipe(select(getAllClients)).subscribe(state => {
       this.clients$ = state
+      if(this.clients$.length > 0) {
+        this.displayPlaceholder = false
+      }
     })
   }
 

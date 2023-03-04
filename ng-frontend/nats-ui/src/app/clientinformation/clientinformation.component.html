@@ -33,4 +33,7 @@
             <tr mat-row *matRowDef="let myRowData; columns: displayedColumns"></tr>
         </table>
     </div>
+    <div class="placeholder-text" *ngIf="displayPlaceholder">
+        <p>There are no clients configured</p>
+    </div>
 </div>
