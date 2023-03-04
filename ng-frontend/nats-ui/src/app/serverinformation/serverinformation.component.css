@@ -19,6 +19,14 @@
     margin: 10px;
 }
 
+.placeholder-text {
+    height: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 button {
     height: 40px;
     width: 130px;
@@ -40,4 +48,10 @@ span {
 
 mat-icon {
     cursor: pointer;
+}
+
+p {
+    width: 15%;
+    font-size: small;
+    color: #49454F;
 }
