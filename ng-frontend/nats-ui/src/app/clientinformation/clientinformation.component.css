@@ -29,6 +29,14 @@
     width: 70%;
 }
 
+.placeholder-text {
+    height: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
 button {
     display: flex;
     justify-content: space-around;
@@ -42,4 +50,10 @@ button {
 
 span {
     font-weight: 600;
+}
+
+p {
+    width: 15%;
+    font-size: small;
+    color: #49454F;
 }

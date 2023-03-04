@@ -17,6 +17,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog'
 })
 
 export class ServerinformationComponent implements OnInit {
+  displayPlaceholder: boolean = true;
   servers$: Observable<Server[]>;
   displayedColumns: string[] = [
     "name", 
@@ -43,6 +44,11 @@ export class ServerinformationComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new LoadAllServers)
     this.servers$ = this.store.pipe(select(getAllServers))
+    this.servers$.subscribe(servers => {
+      if(servers.length > 0) {
+        this.displayPlaceholder = false
+      }
+    })
   }
 
   opendAddServerDialog() {
