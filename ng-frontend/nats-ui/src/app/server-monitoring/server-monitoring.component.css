@@ -26,9 +26,9 @@
 
 .charts {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-weight: 600;
 }
 
 .key-values {
@@ -121,5 +121,4 @@ span {
 p {
     font-size: small;
     color: #49454F;
-    width: 60%;
 }
