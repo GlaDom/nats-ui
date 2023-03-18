@@ -31,8 +31,8 @@ export class ServerEffects {
             ofType<LoadServerMonitoringStats>(ActionTypes.LoadServerMonitoringStats),
             switchMap((action) => 
                 from(this.serverService.getServerMonitoringStats(action.payload, "http://127.0.0.1:8080/api/state/server/monitoring")).pipe(
-                    map((data) => new LoadServerMonitoringStatsSuccess(data),
-                    catchError(async () => new LoadServerMonitoringStatsFailure()))
+                    map((data) => new LoadServerMonitoringStatsSuccess(data)),
+                    catchError(async () => new LoadServerMonitoringStatsFailure())
                 ))
         ))
 
@@ -41,8 +41,8 @@ export class ServerEffects {
             ofType<DeleteServer>(ActionTypes.DeleteServer),
             switchMap((action) =>
                 from(this.serverService.deleteServer(action.payload, "http://127.0.0.1:8080/api/state/server/delete")).pipe(
-                    map((data) => new DeleteServerSuccess(data),
-                    catchError(async () => new DeleteServerFailure()))
+                    map((data) => new DeleteServerSuccess(data)),
+                    catchError(async () => new DeleteServerFailure(action.payload))
                 ))
         ))
 }

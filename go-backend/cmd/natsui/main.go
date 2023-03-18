@@ -98,6 +98,11 @@ func main() {
 			}
 		}
 
+		if retval.Host == "" {
+			ctx.AbortWithError(http.StatusInternalServerError, fmt.Errorf("no server with hostname found, hostname: %s", serverHost))
+			return
+		}
+
 		state.Servers = newServers
 		ctx.JSON(http.StatusOK, &retval)
 	})
