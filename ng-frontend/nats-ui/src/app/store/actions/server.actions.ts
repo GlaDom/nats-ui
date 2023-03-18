@@ -123,6 +123,7 @@ export class DeleteServerSuccess implements  Action {
 
 export class DeleteServerFailure implements Action {
     readonly type = ActionTypes.DeleteServerFailure
+    constructor(public payload: Server) {}
 }
 
 //Client classes

@@ -87,7 +87,6 @@ export function serverReducer(
             const newServerArray: Server[] = [];
             state.servers.forEach(server => {
                 newServerArray.push(Object.assign({}, server))})
-            console.log(index)
             newServerArray[index].status = 'connected'
             newServerArray[index].connections = action.payload.varz.connections
             newServerArray[index].bytesIn = action.payload.varz.in_bytes
@@ -180,7 +179,17 @@ export function serverReducer(
         }
 
         case ActionTypes.DeleteServerFailure: {
-            return state
+            const newServerArray: Server[] = [];
+            state.servers.forEach(server => {
+                if(server.host != action.payload.host){
+                    newServerArray.push(Object.assign({}, server))
+                }
+            })
+
+            return {
+                ...state,
+                servers: newServerArray
+            }
         }
 
         case ActionTypes.LoadAllClients: {
