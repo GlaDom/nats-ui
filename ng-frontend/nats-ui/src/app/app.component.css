@@ -17,6 +17,9 @@
 .right-div {
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 50px auto;
     margin-left: 10px;
+}
+
+.content {
+    height: 100%;
 }

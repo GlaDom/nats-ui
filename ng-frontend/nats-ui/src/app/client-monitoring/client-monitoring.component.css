@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: auto 2px 300px;
     grid-template-rows: 100%;
+    height: 100%;
 }
 
 .left-container {
@@ -87,12 +88,21 @@
     font-size: small;
 }
 
+.placeholder-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
 span {
     font-weight: 600;
 }
 
 p {
-    margin-right: 10px;
+    font-size: small;
+    color: #49454F;
 }
 
 button {

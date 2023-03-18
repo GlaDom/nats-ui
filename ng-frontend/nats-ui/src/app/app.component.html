@@ -9,9 +9,9 @@
     </div>
     <mat-divider vertical="true"></mat-divider>
     <div class="right-div">
-      <app-server-monitoring *ngIf="showServerMonitoring$"></app-server-monitoring>
-      <app-serverinformation *ngIf="showServerInformation$"></app-serverinformation>
-      <app-clientinformation *ngIf="showClientInformation$"></app-clientinformation>
-      <app-client-monitoring *ngIf="showClientMonitoring$"></app-client-monitoring>
+      <app-server-monitoring class="content" *ngIf="showServerMonitoring$"></app-server-monitoring>
+      <app-serverinformation class="content" *ngIf="showServerInformation$"></app-serverinformation>
+      <app-clientinformation class="content" *ngIf="showClientInformation$"></app-clientinformation>
+      <app-client-monitoring class="content" *ngIf="showClientMonitoring$"></app-client-monitoring>
     </div>
   </div>

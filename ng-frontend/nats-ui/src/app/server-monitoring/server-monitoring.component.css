@@ -2,6 +2,7 @@
     display: grid;
     grid-template-columns: auto 2px 300px;
     grid-template-rows: 100%;
+    height: 100%;
 }
 
 .left-container {
