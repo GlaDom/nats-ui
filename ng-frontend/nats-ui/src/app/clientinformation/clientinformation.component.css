@@ -57,3 +57,7 @@ p {
     font-size: small;
     color: #49454F;
 }
+
+mat-icon {
+    cursor: pointer;
+}
